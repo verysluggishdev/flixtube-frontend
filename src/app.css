@@ -52,7 +52,4 @@ header{
 .content{
     width: 75%;
     margin-left: auto;
-    max-height: 100%;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
 }
