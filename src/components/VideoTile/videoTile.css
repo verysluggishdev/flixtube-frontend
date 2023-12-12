@@ -1,0 +1,47 @@
+.video-tile{
+    display: flex;
+    flex-direction: column;
+    max-width: 300px;
+    max-height: 300px;
+    gap: 1rem;
+    cursor: pointer;
+    margin-bottom: 3rem;
+    /* border: 1px solid red; */
+}
+
+.video-thumbnail{
+    border-radius: .5rem;
+    width: 100%;
+}
+
+.video-details{
+    display: flex;
+    gap: 1rem;
+}
+
+.flex-container{
+    display: flex;
+    gap: 1rem;
+}
+
+.creator-avatar{
+    height: 50px;
+    border-radius: 50%;
+}
+
+.video-title{
+    font-weight: bold;
+}
+
+.video-creator, .flex-container{
+    color: gray;
+}
+
+.video-creator{
+    font-weight: bold;
+    font-style: italic;
+}
+
+.video-creator:hover{
+    color: white;
+}

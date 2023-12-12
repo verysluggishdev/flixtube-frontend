@@ -1,0 +1,52 @@
+.sidebar{
+    overflow-y:scroll;
+    font-size: .91rem;
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+}
+
+.sidebar section{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.sidebar section p{
+    display: flex;
+    gap: 1.5rem;
+    padding: .25rem;
+    transition: .25s ease-in;
+    border-radius: .5rem;
+    cursor: pointer;
+}
+
+.sidebar section p:hover{
+    background-color: gray;
+    color: white;
+}
+
+.sidebar section p:focus{
+    background-color: gray;
+    outline: none;
+    color: white;
+}
+
+.sidebar-icon{
+    font-size: 1.19rem;
+}
+
+.sidebar section hr{
+    width: 90%;
+}
+
+
+.sidebar section h1{
+    font-weight: bolder;
+    text-decoration: underline;
+}
+
+.content-faker{
+    height: 100px;
+    /* border: 1px solid red; */
+}

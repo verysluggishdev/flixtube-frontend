@@ -1,0 +1,122 @@
+.quick-access-panel {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .logo {
+    flex-basis: 10%;
+    display: flex;
+    cursor: pointer;
+    /* border: 1px solid red; */
+  }
+
+  .logo *{
+    height: 100%;
+  }
+
+  .logo-name{
+    font-family: cursive;
+    font-weight: bolder;
+    font-size: 1.7rem;
+    height: 100%;
+    /* border: 1px solid green; */
+    /* margin-top: .5rem; */
+
+  }
+
+  .logo-icon{
+    width: 1.7rem;
+  }
+
+
+  .header-icons {
+    flex-basis: 10%;
+  }
+
+
+.search-bar {
+    flex-basis: 50%;
+    display: flex;
+    justify-content: space-between;
+    overflow: hidden;
+}
+
+.search-bar input{
+    width: 90%;
+    height: 100%;
+    font-size: 1rem;
+    background-color: transparent;
+    margin-left: .8rem;
+}
+
+.search-bar input:focus{
+    border: none;
+    outline: none;
+}
+
+
+.search-icon{
+    height: 100%;
+    width: 10%;
+    cursor: pointer;
+}
+
+.header-icons{
+    display: flex;
+    justify-content: space-between;
+    gap: 1.7rem;
+    /* border: 1px solid red; */
+}
+
+.header-icons *{
+    height: 100%;
+    width: 1.7rem;
+    cursor: pointer;
+}
+
+@media (max-width: 767.98px){
+  .logo-name{
+    font-size: 1rem;
+  }
+
+  .logo-icon{
+    width: 1rem;
+  }
+
+  .search-bar input{
+    margin-left: .5rem;
+  }
+
+  .header-icons {
+    gap: 1rem;
+  }
+
+  .header-icons *{
+    width: 1rem;
+  }
+
+}
+
+@media (max-width: 300px){
+  .logo-name{
+    font-size: .5rem;
+  }
+
+  .logo-icon{
+    width: .5rem;
+  }
+
+  .search-bar input{
+    margin-left: .5rem;
+    font-size: .5rem;
+  }
+
+  .header-icons {
+    gap: .5rem;
+  }
+
+  .header-icons *{
+    width: .5rem;
+  }
+
+}
