@@ -6,6 +6,7 @@ import { MdOutlineWbSunny  } from "react-icons/md";
 import { IoMoonOutline } from "react-icons/io5";
 import { VscAccount } from "react-icons/vsc";
 import { IoIosSearch, IoIosNotificationsOutline } from "react-icons/io";
+import { NavLink } from 'react-router-dom';
 
 
 const QuickAccessPanel = () => {
@@ -25,7 +26,7 @@ const QuickAccessPanel = () => {
         <div className="header-icons">
             {colorMode == 'light' ? <IoMoonOutline onClick={toggleColorMode} className='toggle-bg-btn'/> : <MdOutlineWbSunny onClick={toggleColorMode} className='toggle-bg-btn'/>}
             <IoIosNotificationsOutline className='notifications-btn'/>
-            <VscAccount className='account-btn'/>
+            <NavLink to={'/account'}><VscAccount className='account-btn'/></NavLink>
         </div>
     </div>
   )

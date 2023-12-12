@@ -1,5 +1,7 @@
 import VideoTile from "../components/VideoTile/VideoTile"
 import './discover.css'
+import Loader from "../components/Loader/Loader"
+import { useState, useEffect } from "react"
 
 const videoData = {
     thumbnail: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRteOmR370G0SkmmwCNNVvAe_065YyvRs3jHw&usqp=CAU',
@@ -12,7 +14,20 @@ const videoData = {
   }
 
 const Discover = () => {
-  return (
+  const [isLoading, setIsLoading] = useState(true);
+  useEffect(() => {
+    // This will run after the initial render
+    const updateCountAfterDelay = () => {
+      setTimeout(() => {
+        // Update the state after 3 seconds
+        setIsLoading(false);
+      }, 1500);
+    };
+
+    updateCountAfterDelay(); // Call the function after the initial render
+  }, []); // The empty dependency array ensures that this effect runs only once after the initial render
+
+  return  isLoading ? <Loader/> : (
     <div className='content content-listing'>
         <VideoTile videoData={videoData}/>
         <VideoTile videoData={videoData}/>
@@ -27,7 +42,7 @@ const Discover = () => {
         <VideoTile videoData={videoData}/>
         <VideoTile videoData={videoData}/>
     </div>
-  )
+  ) 
 }
 
 export default Discover
