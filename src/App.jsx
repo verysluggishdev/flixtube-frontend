@@ -1,4 +1,3 @@
-
 import { useColorMode } from '@chakra-ui/react';
 import QuickAccessPanel from './components/QuickAccessPanel/QuickAccessPanel';
 import CategoryNav from './components/CategoryNav/CategoryNav';
@@ -6,8 +5,14 @@ import React, { useState, useEffect } from 'react';
 import SideBar from './components/SideBar/SideBar';
 import './app.css'
 import VideoTile from './components/VideoTile/VideoTile';
+import Discover from './pages/Discover';
+import Account from './pages/Account';
+import PlayVideo from './pages/PlayVideo';
+import { Route, Routes } from 'react-router-dom';
 
 const categories = ['all', 'sports', 'music', 'entertainment', 'gaming', 'comedy', 'trailers', 'drama', 'hollywood', 'Africa', 'Kampala']
+
+
 const videoData = {
   thumbnail: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRteOmR370G0SkmmwCNNVvAe_065YyvRs3jHw&usqp=CAU',
   title: '2023 YLYL mEMEs to make u shit yo pants straight up',
@@ -71,20 +76,11 @@ function App() {
 
           <section className="main">
             <SideBar className='sidebar'/>
-            <section className="content">
-              <VideoTile videoData={videoData}/>
-              <VideoTile videoData={videoData}/>
-              <VideoTile videoData={videoData}/>
-              <VideoTile videoData={videoData}/>
-              <VideoTile videoData={videoData}/>
-              <VideoTile videoData={videoData}/>
-              <VideoTile videoData={videoData}/>
-              <VideoTile videoData={videoData}/>
-              <VideoTile videoData={videoData}/>
-              <VideoTile videoData={videoData}/>
-              <VideoTile videoData={videoData}/>
-              <VideoTile videoData={videoData}/>
-            </section>
+            <Routes>
+              <Route path="/" element={<Discover />} />
+              <Route path="/account" element={<Account />} />
+              <Route path="/video" element={<PlayVideo />} />
+            </Routes>
           </section>
       </div>
   );
