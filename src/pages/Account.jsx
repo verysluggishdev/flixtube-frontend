@@ -2,6 +2,8 @@ import { Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react'
 import './account.css'
 import VideoTile from '../components/VideoTile/VideoTile'
 import CategoryNav from '../components/CategoryNav/CategoryNav'
+import { useState, useEffect } from 'react'
+import Loader from '../components/Loader/Loader'
 
 const videoData = {
   thumbnail: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRteOmR370G0SkmmwCNNVvAe_065YyvRs3jHw&usqp=CAU',
@@ -14,7 +16,20 @@ const videoData = {
 }
 
 const Account = () => {
-  return (
+  const [isLoading, setIsLoading] = useState(true);
+  useEffect(() => {
+    // This will run after the initial render
+    const updateCountAfterDelay = () => {
+      setTimeout(() => {
+        // Update the state after 3 seconds
+        setIsLoading(false);
+      }, 1000);
+    };
+
+    updateCountAfterDelay(); // Call the function after the initial render
+  }, []); // The empty dependency array ensures that this effect runs only once after the initial render
+
+  return  isLoading ? <Loader/> : (
     <div className="content account-main">
       <div className='account-info'>
         <div className="channel-info">
