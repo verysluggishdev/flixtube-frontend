@@ -4,11 +4,11 @@ import CategoryNav from './components/CategoryNav/CategoryNav';
 import React, { useState, useEffect } from 'react';
 import SideBar from './components/SideBar/SideBar';
 import './app.css'
-import VideoTile from './components/VideoTile/VideoTile';
 import Discover from './pages/Discover';
 import Account from './pages/Account';
 import PlayVideo from './pages/PlayVideo';
 import { Route, Routes } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 const categories = ['all', 'sports', 'music', 'entertainment', 'gaming', 'comedy', 'trailers', 'drama', 'hollywood', 'Africa', 'Kampala']
 
@@ -48,7 +48,11 @@ function App() {
 
   const { colorMode, toggleColorMode } = useColorMode();
 
-  const headerBgColor = colorMode == 'light' ? 'white' : 'rgb(31, 31, 39)'
+  const headerBgColor = colorMode == 'light' ? 'white' : 'rgb(31, 31, 39)';
+
+  const { data } = useSelector((state) => state.app);
+
+  console.log(data)
   
   const handleResize = () => {
     setWindowWidth(window.innerWidth);

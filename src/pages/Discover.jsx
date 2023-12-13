@@ -21,7 +21,7 @@ const Discover = () => {
       setTimeout(() => {
         // Update the state after 3 seconds
         setIsLoading(false);
-      }, 1500);
+      }, 1000);
     };
 
     updateCountAfterDelay(); // Call the function after the initial render
