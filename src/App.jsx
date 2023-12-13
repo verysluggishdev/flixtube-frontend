@@ -1,3 +1,4 @@
+
 import { useColorMode } from '@chakra-ui/react';
 import QuickAccessPanel from './components/QuickAccessPanel/QuickAccessPanel';
 import CategoryNav from './components/CategoryNav/CategoryNav';
@@ -93,3 +94,4 @@ function App() {
 
 
 export default App;
+

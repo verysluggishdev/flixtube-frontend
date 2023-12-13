@@ -1,0 +1,56 @@
+.channel-info .avatar{
+    width: 10rem;
+    border-radius: 50%;
+    background-color: white;
+}
+
+.channel-name{
+    font-size: 2.5rem;
+    font-weight: 1000;
+}
+
+.flex-row{
+    display: flex;
+    gap: 1rem;
+}
+
+.flex-col{
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+}
+
+.channel-info{
+    display: flex;
+    gap: 1rem;
+}
+
+.subscribe-btn{
+    width: 7rem;
+    background-color: white;
+    color: black;
+    padding: .25rem;
+    border-radius: 1rem;
+    font-weight: 600;
+    transition: .5s ease;
+}
+
+.channel-id{
+    font-style: italic;
+}
+
+.subscribe-btn:hover{
+    background-color: gray;
+    color: white;
+}
+
+.account-main{
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+
+.panel{
+    padding: 0;
+    margin: 0;
+}
