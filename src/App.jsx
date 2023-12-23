@@ -51,9 +51,6 @@ function App() {
 
   const headerBgColor = colorMode == 'light' ? 'white' : 'rgb(31, 31, 39)';
 
-  const { data } = useSelector((state) => state.app);
-
-  console.log(data)
   
   const handleResize = () => {
     setWindowWidth(window.innerWidth);

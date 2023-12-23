@@ -1,20 +1,20 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-    data: 'app data'
+    loggedIn: false
 };
 
 const appSlice = createSlice({
-  name: 'player',
+  name: 'app',
   initialState,
   reducers: {
-    setAppData: (state, action) => {
+    setLoggedIn: (state, action) => {
       
-      state.data = action.payload;
+      state.loggedIn = action.payload;
     },
   },
 });
 
-export const { setAppData } = appSlice.actions;
+export const { setLoggedIn } = appSlice.actions;
 
 export default appSlice.reducer;

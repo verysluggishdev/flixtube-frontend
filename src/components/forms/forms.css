@@ -1,0 +1,31 @@
+.modal-header{
+    padding: 10px;
+    text-align: center;
+    font-weight: 800;
+    font-size: 1.3rem;
+}
+.data-form{
+    margin: 0 auto;
+    padding: 1rem;
+}
+
+.data-form label{
+    display: block;
+    margin: .25rem 0;
+}
+
+.data-form input{
+    background-color: transparent;
+    border: 1px solid gray;
+    width: 100%;
+    border-radius: 5px;
+}
+
+.data-form input:focus{
+    outline: none;
+}
+
+.avatar-form-input{
+    border: none !important;
+
+}
