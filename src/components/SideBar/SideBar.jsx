@@ -5,8 +5,8 @@ import { BiSolidMoviePlay } from "react-icons/bi";
 import { AiFillLike } from "react-icons/ai";
 import { FaHistory } from "react-icons/fa";
 import { MdWatchLater } from "react-icons/md";
-import { IoMdSettings } from "react-icons/io";
 import { NavLink } from 'react-router-dom';
+import { HiOutlineLogout } from "react-icons/hi";
 
 const SideBar = () => {
   return (
@@ -32,7 +32,7 @@ const SideBar = () => {
         <hr />
       </section>
       <section>
-        <NavLink tabIndex={11} className='nav-link'><IoMdSettings className='sidebar-icon'/>Settings</NavLink>
+        <NavLink tabIndex={11} className='nav-link'><HiOutlineLogout className='sidebar-icon'/>Logout</NavLink>
       </section>
       <section>
         <div className="content-faker"></div>
