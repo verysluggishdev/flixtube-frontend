@@ -21,7 +21,7 @@ import {
 
   } from '@chakra-ui/react'
 
-const CreateAccountForm = ({isOpen, onClose}) => {
+const LoginUserForm = ({isOpen, onClose}) => {
     const initialRef = useRef(null)
   const finalRef = useRef(null)
   return (
@@ -42,20 +42,12 @@ const CreateAccountForm = ({isOpen, onClose}) => {
                 <input type="email" name="email" id="" />
                 <label htmlFor="password">Password</label>
                 <input type="password" name="password" id="" />
-                <label htmlFor="confirm-password">Confirm Password</label>
-                <input type="password" name="confirm-password" id="" />
-                <label htmlFor="channelName">Channel Name</label>
-                <input type="text" name="channelName" id="" />
-                <label htmlFor="channelID">Channel ID</label>
-                <input type="text" name="channelID" id="" />
-                <label htmlFor="avatar">Avatar</label>
-                <input type="file" name="avatar" id="" className='avatar-form-input'/>
             </form>
           </ModalBody>
 
           <ModalFooter>
             <Button colorScheme='blue' mr={3}>
-              Create Account
+              Login
             </Button>
             <Button onClick={onClose}>Cancel</Button>
           </ModalFooter>
@@ -65,4 +57,4 @@ const CreateAccountForm = ({isOpen, onClose}) => {
   )
 }
 
-export default CreateAccountForm
+export default LoginUserForm
