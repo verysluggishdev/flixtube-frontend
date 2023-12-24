@@ -1,29 +1,21 @@
 import { useRef } from 'react'
 import './forms.css'
 import {
-    Menu,
-    MenuButton,
-    MenuList,
-    MenuItem,
-    IconButton,
-    useDisclosure,
     Modal,
     ModalOverlay,
     ModalContent,
-    ModalHeader,
     ModalFooter,
     ModalBody,
     ModalCloseButton,
-    FormControl, 
-    FormLabel,
-    Input,
     Button
 
   } from '@chakra-ui/react'
 
-const LoginUserForm = ({isOpen, onClose}) => {
-    const initialRef = useRef(null)
+const LoginUserForm = ({isOpen, onClose, onSubmit}) => {
+  const initialRef = useRef(null)
   const finalRef = useRef(null)
+  
+  
   return (
     <>
         <Modal
@@ -37,16 +29,16 @@ const LoginUserForm = ({isOpen, onClose}) => {
           <h3 className='modal-header'>Create your account</h3>
           <ModalCloseButton />
           <ModalBody pb={6}>
-          <form action="" className="data-form">
+          <form action="" className="data-form" id='login-form'>
                 <label htmlFor="email">Email</label>
-                <input type="email" name="email" id="" />
+                <input type="email" name="email"/>
                 <label htmlFor="password">Password</label>
-                <input type="password" name="password" id="" />
+                <input type="password" name="password"/>
             </form>
           </ModalBody>
 
           <ModalFooter>
-            <Button colorScheme='blue' mr={3}>
+            <Button colorScheme='blue' mr={3} onClick={() => {onSubmit('http://localhost:8000/login', 'login-form', 'Login was successfull!', 'Login failed. Invalid credentials!'); onClose()}}>
               Login
             </Button>
             <Button onClick={onClose}>Cancel</Button>

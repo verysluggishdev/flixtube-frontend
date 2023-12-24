@@ -19,6 +19,35 @@ import { setLoggedIn } from '../../redux/features/appSlice';
 import CreateAccountForm from '../forms/CreateAccountForm';
 import LoginUserForm from '../forms/LoginUserForm';
 
+const submitForm = (url, formId, messageOnSuccess, messageOnFailure) => {
+  const form = document.getElementById(formId);
+    const formData = new FormData(form);
+
+    // Use fetch to send an asynchronous request with FormData
+    fetch(url, {
+      method: 'POST',
+      body: formData,
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+      alert(messageOnSuccess)
+      return response.json();
+    })
+    .then(data => {
+      // Assuming data is the object with access_token and token_type properties
+      if (data.access_token){
+        console.log('settng access token')
+        localStorage.setItem('token', data.access_token)
+      }
+  
+    })
+    .catch(error => {
+      console.error('Error:', error);
+      alert(messageOnFailure)
+    });
+  }
 
 const AccountMenu = () => {
   const dispatch = useDispatch();
@@ -49,11 +78,13 @@ const AccountMenu = () => {
     <CreateAccountForm
         isOpen={createUserFormIsOpen}
         onClose={()=>setCreateUserFormIsOpen(false)}
+        onSubmit={submitForm}
     />
 
     <LoginUserForm
         isOpen={loginUserFormIsOpen}
         onClose={()=>setLoginUserFormIsOpen(false)}
+        onSubmit={submitForm}
     />
 
     </Menu>

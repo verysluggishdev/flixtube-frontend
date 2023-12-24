@@ -21,7 +21,7 @@ import {
 
   } from '@chakra-ui/react'
 
-const CreateAccountForm = ({isOpen, onClose}) => {
+const CreateAccountForm = ({isOpen, onClose, onSubmit}) => {
     const initialRef = useRef(null)
   const finalRef = useRef(null)
   return (
@@ -37,24 +37,24 @@ const CreateAccountForm = ({isOpen, onClose}) => {
           <h3 className='modal-header'>Create your account</h3>
           <ModalCloseButton />
           <ModalBody pb={6}>
-          <form action="" className="data-form">
+          <form action="" className="data-form" id='create-user-form'>
                 <label htmlFor="email">Email</label>
-                <input type="email" name="email" id="" />
+                <input type="email" name="email"/>
                 <label htmlFor="password">Password</label>
-                <input type="password" name="password" id="" />
+                <input type="password" name="password"/>
                 <label htmlFor="confirm-password">Confirm Password</label>
-                <input type="password" name="confirm-password" id="" />
+                <input type="password" name="confirm-password"/>
                 <label htmlFor="channelName">Channel Name</label>
-                <input type="text" name="channelName" id="" />
+                <input type="text" name="channelName"/>
                 <label htmlFor="channelID">Channel ID</label>
-                <input type="text" name="channelID" id="" />
+                <input type="text" name="channelID"/>
                 <label htmlFor="avatar">Avatar</label>
-                <input type="file" name="avatar" id="" className='avatar-form-input'/>
+                <input type="file" name="avatar" className='avatar-form-input'/>
             </form>
           </ModalBody>
 
           <ModalFooter>
-            <Button colorScheme='blue' mr={3}>
+            <Button colorScheme='blue' mr={3} onClick={() => {onSubmit('http://localhost:8000/users', 'create-user-form', 'Account was successfully created', 'Failed to create account'); onClose()}}>
               Create Account
             </Button>
             <Button onClick={onClose}>Cancel</Button>
