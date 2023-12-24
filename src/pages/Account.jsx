@@ -1,6 +1,6 @@
 import { Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react'
 import './account.css'
-import VideoTile from '../components/VideoTile/VideoTile'
+import VideoTile from '../components/Post/Post'
 import CategoryNav from '../components/CategoryNav/CategoryNav'
 import { useState, useEffect } from 'react'
 import Loader from '../components/Loader/Loader'

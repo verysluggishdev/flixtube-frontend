@@ -9,9 +9,9 @@ import Discover from './pages/Discover';
 import Account from './pages/Account';
 import PlayVideo from './pages/PlayVideo';
 import { Route, Routes } from 'react-router-dom';
-import { useSelector } from 'react-redux';
 
 const categories = ['all', 'sports', 'music', 'entertainment', 'gaming', 'comedy', 'trailers', 'drama', 'hollywood', 'Africa', 'Kampala']
+
 
 
 const videoData = {
@@ -50,7 +50,6 @@ function App() {
   const { colorMode, toggleColorMode } = useColorMode();
 
   const headerBgColor = colorMode == 'light' ? 'white' : 'rgb(31, 31, 39)';
-
   
   const handleResize = () => {
     setWindowWidth(window.innerWidth);

@@ -38,7 +38,6 @@ const submitForm = (url, formId, messageOnSuccess, messageOnFailure) => {
     .then(data => {
       // Assuming data is the object with access_token and token_type properties
       if (data.access_token){
-        console.log('settng access token')
         localStorage.setItem('token', data.access_token)
       }
   
