@@ -8,6 +8,11 @@ import { MdWatchLater } from "react-icons/md";
 import { NavLink } from 'react-router-dom';
 import { HiOutlineLogout } from "react-icons/hi";
 
+function logOutUser(){
+  localStorage.removeItem("token");
+  alert("You have been logged out!")
+}
+
 const SideBar = () => {
   return (
     <div className='sidebar'>
@@ -32,7 +37,7 @@ const SideBar = () => {
         <hr />
       </section>
       <section>
-        <NavLink tabIndex={11} className='nav-link'><HiOutlineLogout className='sidebar-icon'/>Logout</NavLink>
+        <NavLink tabIndex={11} className='nav-link' onClick={logOutUser}><HiOutlineLogout className='sidebar-icon'/>Logout</NavLink>
       </section>
       <section>
         <div className="content-faker"></div>
