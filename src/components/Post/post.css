@@ -45,3 +45,7 @@
 .channelID:hover{
     color: white;
 }
+
+.upload-date, .view-count, .channelID{
+    font-size: .8rem;
+}
