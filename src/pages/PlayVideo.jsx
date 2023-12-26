@@ -1,12 +1,19 @@
 import ReactPlayer from 'react-player'
 import './playVideo.css'
+import { useGetPostQuery } from '../redux/services/flixtubeCore'
+import { useParams } from 'react-router-dom'
+import Loader from '../components/Loader/Loader'
+
 
 const PlayVideo = () => {
-  return (
+  const { postID } = useParams();
+  const {data, isFetching, error} = useGetPostQuery({postID: postID})
+  console.log(data)
+  return isFetching ? <Loader/> :(
     <div className="play-video-page content">
       <div className="video">
       <ReactPlayer 
-    url='http://localhost:8000/media/QnVybmEgQm95IC0gR2l6YSAoZmVhdC4gU2V5aSBWaWJleikgW09mZmljaWFsIE11c2ljIFZpZGVvXS5tcDRAMjAyMy0xMi0yMSAxODoyMzoyMi4xNzE1NjI=.mp4' 
+    url={`http://localhost:8000/media/${data?.post.video}`}
     playing={true}
     controls={true}
     width={'100%'}

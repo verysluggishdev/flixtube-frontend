@@ -12,9 +12,11 @@ export const flixtubeCoreApi = createApi({
   }),
   endpoints: (builder) => ({
     getPosts: builder.query({ query: (urlParams) => `/posts` }),
+    getPost: builder.query({ query: (urlParams) => `/posts/${urlParams.postID}` }),
   }),
 });
 
 export const {
   useGetPostsQuery,
+  useGetPostQuery
 } = flixtubeCoreApi;

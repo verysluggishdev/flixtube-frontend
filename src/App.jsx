@@ -80,7 +80,7 @@ function App() {
             <Routes>
               <Route path="/" element={<Discover />} />
               <Route path="/account" element={<Account />} />
-              <Route path="/post/:id" element={<PlayVideo />} />
+              <Route path="/post/:postID" element={<PlayVideo />} />
             </Routes>
           </section>
       </div>
