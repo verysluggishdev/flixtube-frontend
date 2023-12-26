@@ -18,6 +18,8 @@ import { NavLink } from 'react-router-dom';
 import { setLoggedIn } from '../../redux/features/appSlice';
 import CreateAccountForm from '../forms/CreateAccountForm';
 import LoginUserForm from '../forms/LoginUserForm';
+import {store} from '../../redux/store'
+
 
 const submitForm = (url, formId, messageOnSuccess, messageOnFailure) => {
   const form = document.getElementById(formId);
@@ -39,6 +41,7 @@ const submitForm = (url, formId, messageOnSuccess, messageOnFailure) => {
       // Assuming data is the object with access_token and token_type properties
       if (data.access_token){
         localStorage.setItem('token', data.access_token)
+        store.dispatch(setLoggedIn(true))
       }
   
     })

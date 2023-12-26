@@ -7,10 +7,13 @@ import { FaHistory } from "react-icons/fa";
 import { MdWatchLater } from "react-icons/md";
 import { NavLink } from 'react-router-dom';
 import { HiOutlineLogout } from "react-icons/hi";
+import {store} from '../../redux/store'
+import { setLoggedIn } from '../../redux/features/appSlice';
 
 function logOutUser(){
   localStorage.removeItem("token");
   alert("You have been logged out!")
+  store.dispatch(setLoggedIn(false))
 }
 
 const SideBar = () => {

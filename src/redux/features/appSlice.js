@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-    loggedIn: false
+    loggedIn: localStorage.getItem('token') ? true : false,
 };
 
 const appSlice = createSlice({
@@ -12,6 +12,7 @@ const appSlice = createSlice({
       
       state.loggedIn = action.payload;
     },
+
   },
 });
 
