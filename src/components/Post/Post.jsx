@@ -1,4 +1,4 @@
-import React from 'react'
+import { useState, useEffect } from 'react';
 import './post.css'
 
 function determinePeriod(date){
@@ -51,6 +51,17 @@ function determinePeriod(date){
 }
 
 const Post = ({postData}) => {
+  const [uploadDate, setUploadDate] = useState(determinePeriod(postData.post.created_at));
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      // Update the upload date every minute
+      setUploadDate(determinePeriod(postData.post.created_at));
+    }, 60000); // 60 seconds * 1000 milliseconds
+
+    // Clear the interval when the component is unmounted
+    return () => clearInterval(intervalId);
+  }, [postData.post.created_at]);
   return (
     <div className="post">
       <img src={`http://localhost:8000/media/${postData.post.thumbnail}`} alt="" className='post-thumbnail'/>
@@ -61,7 +72,7 @@ const Post = ({postData}) => {
           <p className="channelID">@{postData.channelID}</p>
           <div className="flex-container">
             <p className="view-count">100k Views</p>
-            <p className="upload-date">Uploaded {determinePeriod(postData.post.created_at)} ago</p>
+            <p className="upload-date">Uploaded {uploadDate} ago</p>
           </div>
         </div>
 
