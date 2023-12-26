@@ -1,4 +1,4 @@
-.video-tile{
+.post{
     display: flex;
     flex-direction: column;
     max-width: 300px;
@@ -9,12 +9,12 @@
     /* border: 1px solid red; */
 }
 
-.video-thumbnail{
+.post-thumbnail{
     border-radius: .5rem;
     width: 100%;
 }
 
-.video-details{
+.post-details{
     display: flex;
     gap: 1rem;
 }
@@ -29,19 +29,19 @@
     border-radius: 50%;
 }
 
-.video-title{
+.post-title{
     font-weight: bold;
 }
 
-.video-creator, .flex-container{
+.channelID, .flex-container{
     color: gray;
 }
 
-.video-creator{
+.channelID{
     font-weight: bold;
     font-style: italic;
 }
 
-.video-creator:hover{
+.channelID:hover{
     color: white;
 }
