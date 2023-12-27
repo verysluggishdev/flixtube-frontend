@@ -1,7 +1,6 @@
-.channel-info .avatar{
+.avatar{
     width: 10rem;
     border-radius: 50%;
-    background-color: white;
 }
 
 .channel-name{
@@ -14,10 +13,17 @@
     gap: 1rem;
 }
 
+.channel-info .flex-col{
+    gap: 1rem;
+}
+
+.channel-info .flex-row{
+    gap: .5rem;
+}
+
 .flex-col{
     display: flex;
     flex-direction: column;
-    gap: .5rem;
 }
 
 .channel-info{

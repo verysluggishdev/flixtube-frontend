@@ -59,18 +59,7 @@ const Account = () => {
             <div className="flex-col">
               <CategoryNav categories={['Latest', 'Popular', 'Oldest']}/>
               <div className='content-listing'>
-                <VideoTile videoData={videoData}/>
-                <VideoTile videoData={videoData}/>
-                <VideoTile videoData={videoData}/>
-                <VideoTile videoData={videoData}/>
-                <VideoTile videoData={videoData}/>
-                <VideoTile videoData={videoData}/>
-                <VideoTile videoData={videoData}/>
-                <VideoTile videoData={videoData}/>
-                <VideoTile videoData={videoData}/>
-                <VideoTile videoData={videoData}/>
-                <VideoTile videoData={videoData}/>
-                <VideoTile videoData={videoData}/>
+                
             </div>
             </div>
           </TabPanel>

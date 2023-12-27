@@ -1,5 +1,7 @@
 .play-video-page{
-    align-items: left;
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
 }
 
 .video{
@@ -9,3 +11,52 @@
     height: 20rem;
 }
 
+.play-video-page .container{
+    display: flex;
+    gap: 2rem;
+    /* border: 1px solid red; */
+    width: 60%;
+    justify-content: space-between;
+}
+
+.play-video-page .container .flex-col{
+    justify-content: space-around;
+}
+
+.play-video-page .avatar{
+    width: 3.5rem;
+    border-radius: 50%;
+}
+
+
+.play-video-page .subscribe-btn{
+    align-self: flex-end;
+}
+
+.metric-buttons{
+    gap: 2rem;
+}
+
+.metric-btn{
+    font-size: 1.5rem;
+    align-self: center;
+}
+
+.play-video-page .container .flex-col .channelID{
+    font-size: 1rem;
+}
+
+.play-video-page .container .post-creator-info{
+    gap: .5rem;
+}
+
+
+.play-video-page .container .three-dot-menu{
+    font-size: 1.3rem;
+    align-self: center;
+}
+
+.post-title{
+    font-size: 1.5rem;
+    text-transform: capitalize;
+}
