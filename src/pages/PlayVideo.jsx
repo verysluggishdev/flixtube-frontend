@@ -44,19 +44,48 @@ const PlayVideo = () => {
 
     if (action === 'shared'){
       setShared(true)
-    }}
+    }
+    const apiUrl = `http://localhost:8000/posts/${postID}`;
+    
+    var postData = {liked: liked, disliked:disliked, shared:shared};
+    if (action == 'liked'){
+      if (!liked){
+        postData.liked = true
+        setLikedCount(likeCount+1)
+        if (disliked){
+          postData.disliked = false
+          setDisLikeCount(dislikeCount-1)
+        } 
+
+      } else {
+        postData.liked = false
+        setLikedCount(likeCount-1)
+      }
+      
+    }
+    if (action == 'disliked'){
+      if (!disliked){
+        postData.disliked = true
+        setDisLikeCount(dislikeCount+1)
+        if (liked) {
+          postData.liked = false
+          setLikedCount(likeCount-1)
+        }
+      } else {
+        postData.disliked = false
+        setDisLikeCount(dislikeCount-1)
+      }
+    }
+    if (action == 'shared'){
+      postData.shared = true
+      
+    }
+
+    console.log(postData)
 
 
-    useEffect(() => {
-      const apiUrl = `http://localhost:8000/posts/${postID}`;
     
-      const postData = {
-        liked: liked,
-        disliked: disliked,
-        shared: shared
-      };
-    
-      console.log(postData);
+    console.log(postData);
     
    
   const requestOptions = {
@@ -77,8 +106,13 @@ const PlayVideo = () => {
     .catch(error => {
       console.error('Error:', error);
     });
+  }
 
-  }, [liked, disliked, shared]);
+  
+    
+    
+
+  
   
   return isFetching ? <Loader/> :(
     <div className="play-video-page content">
@@ -101,9 +135,18 @@ const PlayVideo = () => {
           </div>
         </div>
         <div className="metric-buttons flex-row">
-          <IoMdThumbsUp className={`metric-btn ${liked ? 'liked':''}`} onClick={()=>handleMetricClick('liked')}/>
-          <IoMdThumbsDown className={`metric-btn ${disliked ? 'disliked':''}`} onClick={()=>handleMetricClick('disliked')}/>
-          <IoMdShareAlt className={`metric-btn ${shared ? 'shared':''}`} onClick={()=>handleMetricClick('shared')}/>
+          <div className="metric-container">
+            <IoMdThumbsUp className={`metric-btn ${liked ? 'liked':''}`} onClick={()=>handleMetricClick('liked')}/>
+            <div className="metric-count">{likeCount}</div>
+          </div>
+          <div className="metric-container">
+            <IoMdThumbsDown className={`metric-btn ${disliked ? 'disliked':''}`} onClick={()=>handleMetricClick('disliked')}/>
+            <div className="metric-count">{dislikeCount}</div>
+          </div>
+          <div className="metric-container">
+            <IoMdShareAlt className={`metric-btn ${shared ? 'shared':''}`} onClick={()=>handleMetricClick('shared')}/>
+            <div className="metric-count">{shareCount}</div>
+          </div>
         </div>
         <BsThreeDotsVertical className='three-dot-menu'/>
       </div>

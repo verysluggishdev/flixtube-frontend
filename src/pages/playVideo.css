@@ -34,12 +34,15 @@
 }
 
 .metric-buttons{
-    gap: 2rem;
+    gap: 1.5rem;
+}
+
+.metric-buttons * {
+    align-self: center;
 }
 
 .metric-btn{
     font-size: 1.5rem;
-    align-self: center;
 }
 
 .play-video-page .container .flex-col .channelID{
@@ -67,4 +70,14 @@
 
 .play-video-page .container .flex-col * {
     align-self: flex-start;
+}
+
+
+.metric-container{
+    display: flex;
+    gap: .5rem;
+}
+
+.metric-count{
+    font-weight: 800;
 }
