@@ -43,7 +43,7 @@
 }
 
 .play-video-page .container .flex-col .channelID{
-    font-size: 1rem;
+    font-size: .9rem;
 }
 
 .play-video-page .container .post-creator-info{
@@ -59,4 +59,12 @@
 .post-title{
     font-size: 1.5rem;
     text-transform: capitalize;
+}
+
+.liked, .disliked, .shared{
+    color: rgb(8, 144, 189);
+}
+
+.play-video-page .container .flex-col * {
+    align-self: flex-start;
 }

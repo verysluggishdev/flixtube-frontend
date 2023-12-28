@@ -14,7 +14,7 @@ const Discover = () => {
   return  isFetching ? <Loader/> : (
     <div className='content content-listing'>
       {data?.map((item, i)=>{
-        return <NavLink to={`/post/${item.post.id}`} key={i}><Post postData={item}/></NavLink>  
+        return <NavLink to={`/post/${item.id}`} key={i}><Post postData={item}/></NavLink>  
       })}        
     </div>
   ) 

@@ -27,25 +27,26 @@ function determinePeriod(date) {
 }
 
 const Post = ({postData}) => {
-  const [uploadDate, setUploadDate] = useState(determinePeriod(postData.post.created_at));
+  const [uploadDate, setUploadDate] = useState(determinePeriod(postData.created_at));
 
   useEffect(() => {
     const intervalId = setInterval(() => {
       // Update the upload date every minute
-      setUploadDate(determinePeriod(postData.post.created_at));
+      setUploadDate(determinePeriod(postData.created_at));
     }, 60000); // 60 seconds * 1000 milliseconds
 
     // Clear the interval when the component is unmounted
     return () => clearInterval(intervalId);
-  }, [postData.post.created_at]);
+  }, [postData.created_at]);
+  console.log(postData)
   return (
     <div className="post">
-      <img src={`http://localhost:8000/media/${postData.post.thumbnail}`} alt="" className='post-thumbnail'/>
+      <img src={`http://localhost:8000/media/${postData.thumbnail}`} alt="" className='post-thumbnail'/>
       <div className="post-details">
-        <img src={`http://localhost:8000/media/${postData.avatar}`} alt="" className="creator-avatar"/>
+        <img src={`http://localhost:8000/media/${postData.owner.avatar}`} alt="" className="creator-avatar"/>
         <div className="post-info">
-          <p className="post-title">{postData.post.title}</p>
-          <p className="channelID">@{postData.channelID}</p>
+          <p className="post-title">{postData.title}</p>
+          <p className="channelID">@{postData.owner.channelID}</p>
           <div className="flex-container">
             <p className="view-count">100k Views</p>
             <p className="upload-date">Uploaded {uploadDate}</p>
