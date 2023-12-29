@@ -21,7 +21,7 @@ const PlayVideo = () => {
 
   useEffect(() => {
     // Update state based on the fetched data when it's available
-    if (!isFetching) {
+    if (!isFetching && data) {
       setLikedCount(data.likes);
       setDisLikeCount(data.dislikes);
       setShareCount(data.shares);
@@ -81,11 +81,7 @@ const PlayVideo = () => {
       
     }
 
-    console.log(postData)
 
-
-    
-    console.log(postData);
     
    
   const requestOptions = {
@@ -114,7 +110,7 @@ const PlayVideo = () => {
 
   
   
-  return isFetching ? <Loader/> :(
+  return isFetching  ? <Loader/> :(
     <div className="play-video-page content">
       <div className="video">
         <ReactPlayer 

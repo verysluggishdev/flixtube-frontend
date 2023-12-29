@@ -9,14 +9,23 @@ import { NavLink } from 'react-router-dom';
 import { HiOutlineLogout } from "react-icons/hi";
 import {store} from '../../redux/store'
 import { setLoggedIn } from '../../redux/features/appSlice';
+import { useSelector } from 'react-redux';
+import { IoIosLogIn } from "react-icons/io";
+import LoginUserForm from '../forms/LoginUserForm';
+import { useState } from 'react';
+import { submitForm } from '../AccountMenu/AccountMenu';
 
 function logOutUser(){
-  localStorage.removeItem("token");
+  localStorage.removeItem("token")
+  localStorage.removeItem("userID")
   alert("You have been logged out!")
   store.dispatch(setLoggedIn(false))
+  window.location.reload()
 }
 
 const SideBar = () => {
+  const [loginUserFormIsOpen, setLoginUserFormIsOpen] = useState(false)
+  const loggedIn = useSelector((state)=>state.app.loggedIn)
   return (
     <div className='sidebar'>
       <section>
@@ -40,11 +49,27 @@ const SideBar = () => {
         <hr />
       </section>
       <section>
-        <NavLink tabIndex={11} className='nav-link' onClick={logOutUser}><HiOutlineLogout className='sidebar-icon'/>Logout</NavLink>
+        {
+          loggedIn ? (
+            <NavLink tabIndex={11} className='nav-link' onClick={logOutUser}>
+              <HiOutlineLogout className='sidebar-icon'/>Logout
+            </NavLink>
+          ) : (
+            <NavLink tabIndex={11} className='nav-link' onClick={()=>setLoginUserFormIsOpen(true)}>
+              <IoIosLogIn className='sidebar-icon'/>Login 
+            </NavLink>
+          )
+        }
       </section>
       <section>
         <div className="content-faker"></div>
       </section>
+
+    <LoginUserForm
+        isOpen={loginUserFormIsOpen}
+        onClose={()=>setLoginUserFormIsOpen(false)}
+        onSubmit={submitForm}
+    />
     </div>
   )
 }

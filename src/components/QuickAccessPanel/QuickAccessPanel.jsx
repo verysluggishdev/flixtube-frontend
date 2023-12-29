@@ -6,7 +6,7 @@ import { MdOutlineWbSunny  } from "react-icons/md";
 import { IoMoonOutline } from "react-icons/io5";
 import { IoIosSearch, IoIosNotificationsOutline } from "react-icons/io";
 import { NavLink } from 'react-router-dom';
-import AccountMenu from "../AccountMenu/AccountMenu";
+import {AccountMenu} from "../AccountMenu/AccountMenu";
 
 
 const QuickAccessPanel = () => {

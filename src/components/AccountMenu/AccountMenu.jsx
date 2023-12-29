@@ -3,14 +3,7 @@ import { HiOutlinePencilAlt } from "react-icons/hi";
 import { useState } from 'react';
 import React from 'react'
 import { VscAccount } from "react-icons/vsc";
-import {
-    Menu,
-    MenuButton,
-    MenuList,
-    MenuItem,
-    IconButton,
-
-  } from '@chakra-ui/react'
+import {Menu, MenuButton, MenuList, MenuItem, IconButton} from '@chakra-ui/react'
 import './accountMenu.css'
 import { IoIosLogIn } from "react-icons/io";
 import { MdAccountCircle } from "react-icons/md";
@@ -19,15 +12,31 @@ import { setLoggedIn } from '../../redux/features/appSlice';
 import CreateAccountForm from '../forms/CreateAccountForm';
 import LoginUserForm from '../forms/LoginUserForm';
 import {store} from '../../redux/store'
+import UpdateAccountForm from '../forms/UpdateAccountForm';
+import { MdOutlineSystemUpdateAlt } from "react-icons/md";
 
+function removeEmptyAttributes(formData) {
+  formData.forEach((value, key) => {
+    console.log(key, value?value:'null')
+    if (value === '' || value === null || value === undefined ) {
+      formData.delete(key);
+    }
+  });
+}
 
-const submitForm = (url, formId, messageOnSuccess, messageOnFailure) => {
+const submitForm = (url, formId, messageOnSuccess, messageOnFailure, method='POST') => {
   const form = document.getElementById(formId);
     const formData = new FormData(form);
+    removeEmptyAttributes(formData)
+    console.log(formData)
+    const token = localStorage.getItem('token')
 
     // Use fetch to send an asynchronous request with FormData
     fetch(url, {
-      method: 'POST',
+      method: method,
+      headers: {
+        'Authorization': token ?  `Bearer ${token}`:''
+      },
       body: formData,
     })
     .then(response => {
@@ -41,7 +50,9 @@ const submitForm = (url, formId, messageOnSuccess, messageOnFailure) => {
       // Assuming data is the object with access_token and token_type properties
       if (data.access_token){
         localStorage.setItem('token', data.access_token)
+        localStorage.setItem('userID', data.id)
         store.dispatch(setLoggedIn(true))
+        window.location.reload()
       }
   
     })
@@ -52,13 +63,11 @@ const submitForm = (url, formId, messageOnSuccess, messageOnFailure) => {
   }
 
 const AccountMenu = () => {
-  const dispatch = useDispatch();
+  const loggedIn = useSelector((state)=>state.app.loggedIn)
   const [createUserFormIsOpen, setCreateUserFormIsOpen] = useState(false)
   const [loginUserFormIsOpen, setLoginUserFormIsOpen] = useState(false)
-  const { loggedIn } = useSelector((state) => state.app);
-
+  const [updateAccountFormIsOpen, setUpdateAccountFormIsOpen] = useState(false)
   
-//   console.log(loggedIn)
 //   useEffect(() => {dispatch(setLoggedIn(true))})
 //   console.log(loggedIn)
   
@@ -72,9 +81,19 @@ const AccountMenu = () => {
             variant='outline'
         />
         <MenuList className='account-menu'>
-            <MenuItem className='menu-item' onClick={()=>setCreateUserFormIsOpen(true)}><HiOutlinePencilAlt/> Sign Up</MenuItem>
-            <MenuItem className='menu-item' onClick={()=>setLoginUserFormIsOpen(true)}><IoIosLogIn/> Login</MenuItem>
-            <NavLink to='/account'><MenuItem className='menu-item'><MdAccountCircle/> Your Account</MenuItem></NavLink>
+            {
+              loggedIn ? (
+            <>
+              <MenuItem className='menu-item' onClick={()=>setUpdateAccountFormIsOpen(true)}><MdOutlineSystemUpdateAlt/> Update Profile</MenuItem>
+              <NavLink to='/account'><MenuItem className='menu-item'><MdAccountCircle/> Your Account</MenuItem></NavLink>
+            </>
+              ):(
+                <>
+                  <MenuItem className='menu-item' onClick={()=>setCreateUserFormIsOpen(true)}><HiOutlinePencilAlt/> Sign Up</MenuItem>
+                  <MenuItem className='menu-item' onClick={()=>setLoginUserFormIsOpen(true)}><IoIosLogIn/> Login</MenuItem>
+                </>
+              )
+            }
         </MenuList>
 
     <CreateAccountForm
@@ -89,8 +108,14 @@ const AccountMenu = () => {
         onSubmit={submitForm}
     />
 
+    <UpdateAccountForm
+        isOpen={updateAccountFormIsOpen}
+        onClose={()=>setUpdateAccountFormIsOpen(false)}
+        onSubmit={submitForm}
+    />
+
     </Menu>
   )
 }
 
-export default AccountMenu
+export {submitForm, AccountMenu};

@@ -26,7 +26,7 @@ const LoginUserForm = ({isOpen, onClose, onSubmit}) => {
       >
         <ModalOverlay />
         <ModalContent>
-          <h3 className='modal-header'>Create your account</h3>
+          <h3 className='modal-header'>Login to your account</h3>
           <ModalCloseButton />
           <ModalBody pb={6}>
           <form action="" className="data-form" id='login-form'>
