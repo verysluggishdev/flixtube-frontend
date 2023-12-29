@@ -59,7 +59,7 @@ const UpdateAccountForm = ({isOpen, onClose, onSubmit}) => {
           </ModalBody>
 
           <ModalFooter>
-            <Button colorScheme='blue' mr={3} onClick={() => {onSubmit(`http://localhost:8000/users/${userID}`, 'update-user-form', 'Account was successfully updated', 'Failed to update account', 'PUT'); onClose(); window.location.reload()}}>
+            <Button colorScheme='blue' mr={3} onClick={() => {onSubmit(`http://localhost:8000/users/${userID}`, 'update-user-form', 'Account was successfully updated', 'Failed to update account', 'PUT'); onClose()}}>
               Update Account
             </Button>
             <Button onClick={onClose}>Cancel</Button>
