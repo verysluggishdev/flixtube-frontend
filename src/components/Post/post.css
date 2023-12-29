@@ -50,3 +50,8 @@
 .upload-date, .view-count, .channelID{
     font-size: .8rem;
 }
+
+.delete-post-btn{
+    color: rgb(109, 25, 25);
+}
+

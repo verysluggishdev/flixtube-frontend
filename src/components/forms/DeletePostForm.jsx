@@ -1,48 +1,56 @@
 import { useRef } from 'react'
 import './forms.css'
+import { logOutUser } from '../SideBar/SideBar'
 import {
+    Menu,
+    MenuButton,
+    MenuList,
+    MenuItem,
+    IconButton,
+    useDisclosure,
     Modal,
     ModalOverlay,
     ModalContent,
+    ModalHeader,
     ModalFooter,
     ModalBody,
     ModalCloseButton,
+    FormControl, 
+    FormLabel,
+    Input,
     Button
 
   } from '@chakra-ui/react'
 
-const LoginUserForm = ({isOpen, onClose, onSubmit}) => {
+const DeletePostForm = ({isOpen, onClose, onSubmit, postID}) => {
   const initialRef = useRef(null)
   const finalRef = useRef(null)
-  
-  
   return (
     <>
-        <Modal
+    <Modal
         initialFocusRef={initialRef}
         finalFocusRef={finalRef}
         isOpen={isOpen}
         onClose={onClose}
       >
-        <ModalOverlay
+  
+      <ModalOverlay
         bg='blackAlpha.300'
         backdropFilter='blur(10px) hue-rotate(90deg)'
       />
+  
         <ModalContent>
-          <h3 className='modal-header'>Login to your account</h3>
+          <h3 className='modal-header'>Delete This Post</h3>
           <ModalCloseButton />
           <ModalBody pb={6}>
-          <form action="" className="data-form" id='login-form'>
-                <label htmlFor="email">Email</label>
-                <input type="email" name="email"/>
-                <label htmlFor="password">Password</label>
-                <input type="password" name="password"/>
+            <form id='delete-post-form'>
+              Are you sure you want to delete this post?
             </form>
           </ModalBody>
 
           <ModalFooter>
-            <Button colorScheme='blue' mr={3} onClick={() => {onSubmit('http://localhost:8000/login', 'login-form', 'Login was successfull!', 'Login failed. Invalid credentials!'); onClose()}}>
-              Login
+            <Button colorScheme='red' mr={3} onClick={() => {onSubmit(`http://localhost:8000/posts/${postID}`, 'delete-post-form', 'Post was successfully deleted', 'Failed to delete post', 'DELETE'); onClose(); window.location.reload()}}>
+              Delete Post
             </Button>
             <Button onClick={onClose}>Cancel</Button>
           </ModalFooter>
@@ -52,4 +60,4 @@ const LoginUserForm = ({isOpen, onClose, onSubmit}) => {
   )
 }
 
-export default LoginUserForm
+export default DeletePostForm

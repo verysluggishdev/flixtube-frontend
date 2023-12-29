@@ -1,48 +1,57 @@
 import { useRef } from 'react'
 import './forms.css'
+import { logOutUser } from '../SideBar/SideBar'
 import {
+    Menu,
+    MenuButton,
+    MenuList,
+    MenuItem,
+    IconButton,
+    useDisclosure,
     Modal,
     ModalOverlay,
     ModalContent,
+    ModalHeader,
     ModalFooter,
     ModalBody,
     ModalCloseButton,
+    FormControl, 
+    FormLabel,
+    Input,
     Button
 
   } from '@chakra-ui/react'
 
-const LoginUserForm = ({isOpen, onClose, onSubmit}) => {
+const DeleteUserForm = ({isOpen, onClose, onSubmit}) => {
   const initialRef = useRef(null)
   const finalRef = useRef(null)
-  
-  
+  const userID = localStorage.getItem('userID')
   return (
     <>
-        <Modal
+    <Modal
         initialFocusRef={initialRef}
         finalFocusRef={finalRef}
         isOpen={isOpen}
         onClose={onClose}
       >
-        <ModalOverlay
+  
+      <ModalOverlay
         bg='blackAlpha.300'
         backdropFilter='blur(10px) hue-rotate(90deg)'
       />
+  
         <ModalContent>
-          <h3 className='modal-header'>Login to your account</h3>
+          <h3 className='modal-header'>Delete your account</h3>
           <ModalCloseButton />
           <ModalBody pb={6}>
-          <form action="" className="data-form" id='login-form'>
-                <label htmlFor="email">Email</label>
-                <input type="email" name="email"/>
-                <label htmlFor="password">Password</label>
-                <input type="password" name="password"/>
+            <form id='delete-user-form'>
+              Are you sure you want to delete your account?
             </form>
           </ModalBody>
 
           <ModalFooter>
-            <Button colorScheme='blue' mr={3} onClick={() => {onSubmit('http://localhost:8000/login', 'login-form', 'Login was successfull!', 'Login failed. Invalid credentials!'); onClose()}}>
-              Login
+            <Button colorScheme='red' mr={3} onClick={() => {onSubmit(`http://localhost:8000/users/${userID}`, 'delete-user-form', 'Account was successfully deleted', 'Failed to delete account', 'DELETE'); onClose(); logOutUser();}}>
+              Delete Account
             </Button>
             <Button onClick={onClose}>Cancel</Button>
           </ModalFooter>
@@ -52,4 +61,4 @@ const LoginUserForm = ({isOpen, onClose, onSubmit}) => {
   )
 }
 
-export default LoginUserForm
+export default DeleteUserForm

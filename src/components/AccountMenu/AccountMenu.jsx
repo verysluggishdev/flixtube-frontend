@@ -14,6 +14,8 @@ import LoginUserForm from '../forms/LoginUserForm';
 import {store} from '../../redux/store'
 import UpdateAccountForm from '../forms/UpdateAccountForm';
 import { MdOutlineSystemUpdateAlt } from "react-icons/md";
+import DeleteUserForm from '../forms/DeleteUserForm';
+import { TiUserDelete } from "react-icons/ti";
 
 function removeEmptyAttributes(formData) {
   formData.forEach((value, key) => {
@@ -44,7 +46,8 @@ const submitForm = (url, formId, messageOnSuccess, messageOnFailure, method='POS
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
       alert(messageOnSuccess)
-      return response.json();
+      return response.status == 204 ? {data:"none"}: response.json();    
+    
     })
     .then(data => {
       // Assuming data is the object with access_token and token_type properties
@@ -58,13 +61,14 @@ const submitForm = (url, formId, messageOnSuccess, messageOnFailure, method='POS
     })
     .catch(error => {
       console.error('Error:', error);
-      alert(messageOnFailure)
+      method == 'DELETE'?'': alert(messageOnFailure)
     });
   }
 
 const AccountMenu = () => {
   const loggedIn = useSelector((state)=>state.app.loggedIn)
   const [createUserFormIsOpen, setCreateUserFormIsOpen] = useState(false)
+  const [deleteUserFormIsOpen, setDeleteUserFormIsOpen] = useState(false)
   const [loginUserFormIsOpen, setLoginUserFormIsOpen] = useState(false)
   const [updateAccountFormIsOpen, setUpdateAccountFormIsOpen] = useState(false)
   
@@ -85,6 +89,7 @@ const AccountMenu = () => {
               loggedIn ? (
             <>
               <MenuItem className='menu-item' onClick={()=>setUpdateAccountFormIsOpen(true)}><MdOutlineSystemUpdateAlt/> Update Profile</MenuItem>
+              <MenuItem className='menu-item' onClick={()=>setDeleteUserFormIsOpen(true)}><TiUserDelete/> Delete Account</MenuItem>
               <NavLink to='/account'><MenuItem className='menu-item'><MdAccountCircle/> Your Account</MenuItem></NavLink>
             </>
               ):(
@@ -114,6 +119,11 @@ const AccountMenu = () => {
         onSubmit={submitForm}
     />
 
+    <DeleteUserForm
+      isOpen={deleteUserFormIsOpen}
+      onClose={()=>setDeleteUserFormIsOpen(false)}
+      onSubmit={submitForm}
+    />
     </Menu>
   )
 }

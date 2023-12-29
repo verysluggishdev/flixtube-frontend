@@ -22,17 +22,22 @@ import {
   } from '@chakra-ui/react'
 
 const CreateAccountForm = ({isOpen, onClose, onSubmit}) => {
-    const initialRef = useRef(null)
+  const initialRef = useRef(null)
   const finalRef = useRef(null)
   return (
     <>
-        <Modal
+    <Modal
         initialFocusRef={initialRef}
         finalFocusRef={finalRef}
         isOpen={isOpen}
         onClose={onClose}
       >
-        <ModalOverlay />
+  
+      <ModalOverlay
+        bg='blackAlpha.300'
+        backdropFilter='blur(10px) hue-rotate(90deg)'
+      />
+  
         <ModalContent>
           <h3 className='modal-header'>Create your account</h3>
           <ModalCloseButton />

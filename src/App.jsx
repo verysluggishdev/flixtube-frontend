@@ -3,7 +3,7 @@ import { useColorMode } from '@chakra-ui/react';
 import QuickAccessPanel from './components/QuickAccessPanel/QuickAccessPanel';
 import CategoryNav from './components/CategoryNav/CategoryNav';
 import React, { useState, useEffect } from 'react';
-import SideBar from './components/SideBar/SideBar';
+import {SideBar} from './components/SideBar/SideBar';
 import './app.css'
 import Discover from './pages/Discover';
 import Account from './pages/Account';

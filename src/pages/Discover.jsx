@@ -9,7 +9,7 @@ import { useSelector } from 'react-redux';
 
 const Discover = () => {
   const loggedIn = useSelector((state)=>state.app.loggedIn)
-  const {data, isFetching, error} = useGetPostsQuery({variables: loggedIn})
+  const {data, isFetching, error} = useGetPostsQuery()
 
   return  isFetching ? <Loader/> : (
     <div className='content content-listing'>

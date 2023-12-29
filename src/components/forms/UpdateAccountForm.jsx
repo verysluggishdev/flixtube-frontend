@@ -28,13 +28,16 @@ const UpdateAccountForm = ({isOpen, onClose, onSubmit}) => {
 
   return (
     <>
-        <Modal
+      <Modal
         initialFocusRef={initialRef}
         finalFocusRef={finalRef}
         isOpen={isOpen}
         onClose={onClose}
       >
-        <ModalOverlay />
+      <ModalOverlay
+        bg='blackAlpha.300'
+        backdropFilter='blur(10px) hue-rotate(90deg)'
+      />
         <ModalContent>
           <h3 className='modal-header'>Update your account</h3>
           <ModalCloseButton />
