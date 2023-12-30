@@ -16,12 +16,16 @@ import UpdateAccountForm from '../forms/UpdateAccountForm';
 import { MdOutlineSystemUpdateAlt } from "react-icons/md";
 import DeleteUserForm from '../forms/DeleteUserForm';
 import { TiUserDelete } from "react-icons/ti";
+import { IoAddCircle } from "react-icons/io5";
 
-function removeEmptyAttributes(formData) {
+function removeEmptyAttributes(formData, method) {
   formData.forEach((value, key) => {
-    console.log(key, value?value:'null')
-    if (value === '' || value === null || value === undefined ) {
-      formData.delete(key);
+    if (key == 'video' || key == 'video'){
+      if (method == 'PUT'){
+        if (value.size == 0){
+          formData.delete(key)
+        }
+      }
     }
   });
 }
@@ -29,8 +33,7 @@ function removeEmptyAttributes(formData) {
 const submitForm = (url, formId, messageOnSuccess, messageOnFailure, method='POST') => {
   const form = document.getElementById(formId);
     const formData = new FormData(form);
-    removeEmptyAttributes(formData)
-    console.log(formData)
+    removeEmptyAttributes(formData, method)
     const token = localStorage.getItem('token')
 
     // Use fetch to send an asynchronous request with FormData

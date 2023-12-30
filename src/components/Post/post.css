@@ -52,6 +52,9 @@
 }
 
 .delete-post-btn{
-    color: rgb(109, 25, 25);
+    color: rgb(247, 65, 65);
 }
 
+.update-post-btn{
+    color: lightblue;
+}

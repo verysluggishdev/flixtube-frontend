@@ -60,3 +60,15 @@
     padding: 0;
     margin: 0;
 }
+
+.add-post-btn{
+    align-self: center;
+    font-size: 2rem;
+}
+
+.add-post-btn:hover{
+    color: gray;
+}
+
+
+

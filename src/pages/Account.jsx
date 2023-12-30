@@ -6,6 +6,10 @@ import { useState, useEffect } from 'react'
 import Loader from '../components/Loader/Loader'
 import { useGetUserQuery, useGetUserPostsQuery } from '../redux/services/flixtubeCore'
 import Post from '../components/Post/Post'
+import { IoAdd, IoAddCircle } from 'react-icons/io5'
+import { Tooltip } from '@chakra-ui/react'
+import CreatePostForm from '../components/forms/CreatePostForm'
+import { submitForm } from '../components/AccountMenu/AccountMenu'
 
 
 
@@ -14,6 +18,8 @@ const Account = () => {
   const [user, setUser] = useState(null)
   const [ready, setReady] = useState(false)
   const [userPosts, setUserPosts] = useState(null)
+  const [createPostFormIsOpen, setCreatePostFormIsOpen] = useState(false)
+
   const userID = localStorage.getItem('userID')
   if (!userID){
     window.location.href = '/'
@@ -44,7 +50,10 @@ const Account = () => {
             <p className="channel-view-count">100M views</p>
             </div>
             <p className="channel-headline">You Laugh You Lose</p>
-            <button className="subscribe-btn">Subscribe</button>
+            <div className="flex-row">
+              <button className="subscribe-btn">Subscribe</button>
+              <IoAddCircle className='add-post-btn' onClick={() => setCreatePostFormIsOpen(true)}/>
+            </div>
           </div>
         </div>
       </div>
@@ -60,7 +69,6 @@ const Account = () => {
               <CategoryNav categories={['Latest', 'Popular', 'Oldest']}/>
               <div className='content-listing'>
                 {userPosts.map((post, i)=>{
-                  console.log(userPosts)
                   return  <Post postData={post} key={i} viewedByOwner={true}/>
                 })}
               </div>
@@ -72,6 +80,11 @@ const Account = () => {
         </TabPanels>
       </Tabs>
       </div>
+      <CreatePostForm
+        isOpen={createPostFormIsOpen}
+        onClose={()=>setCreatePostFormIsOpen(false)}
+        onSubmit={submitForm}
+      />
     </div>
   )
 }
