@@ -17,6 +17,8 @@ import { MdOutlineSystemUpdateAlt } from "react-icons/md";
 import DeleteUserForm from '../forms/DeleteUserForm';
 import { TiUserDelete } from "react-icons/ti";
 import { IoAddCircle } from "react-icons/io5";
+import { HiOutlineLogout } from "react-icons/hi";
+import { logOutUser } from '../SideBar/SideBar';
 
 function removeEmptyAttributes(formData, method) {
   formData.forEach((value, key) => {
@@ -94,6 +96,7 @@ const AccountMenu = () => {
               <MenuItem className='menu-item' onClick={()=>setUpdateAccountFormIsOpen(true)}><MdOutlineSystemUpdateAlt/> Update Profile</MenuItem>
               <MenuItem className='menu-item' onClick={()=>setDeleteUserFormIsOpen(true)}><TiUserDelete/> Delete Account</MenuItem>
               <NavLink to='/account'><MenuItem className='menu-item'><MdAccountCircle/> Your Account</MenuItem></NavLink>
+              <MenuItem className='menu-item' onClick={logOutUser}><HiOutlineLogout onClick={logOutUser}/> Logout</MenuItem>
             </>
               ):(
                 <>
