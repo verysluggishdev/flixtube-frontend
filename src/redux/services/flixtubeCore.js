@@ -11,7 +11,8 @@ export const flixtubeCoreApi = createApi({
     },
   }),
   endpoints: (builder) => ({
-    getPosts: builder.query({ query: (urlParams) => `/posts` }),
+    getPosts: builder.query({ query: (urlParams) => 
+      `/posts?${urlParams?.category?`category=${urlParams.category}`:''}`}),
     getPost: builder.query({ query: (urlParams) => `/posts/${urlParams.postID}`}),
     getUser: builder.query({ query: (urlParams) => `/users/${urlParams.userID}`}),
     getUserPosts: builder.query({ query: (urlParams) => `/posts?owner_id=${urlParams.userID}`})

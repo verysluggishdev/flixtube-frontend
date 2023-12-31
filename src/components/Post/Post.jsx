@@ -5,6 +5,7 @@ import DeletePostForm from '../forms/DeletePostForm';
 import { submitForm } from '../AccountMenu/AccountMenu';
 import { FaPenToSquare } from "react-icons/fa6";
 import UpdatePostForm from '../forms/UpdatePostForm';
+import { NavLink } from 'react-router-dom';
 
 function determinePeriod(date) {
   const givenDate = new Date(date);
@@ -49,7 +50,7 @@ const Post = ({postData, viewedByOwner}) => {
 
   return (
     <div className="post">
-      <img src={`http://localhost:8000/media/${postData.thumbnail}`} alt="" className='post-thumbnail'/>
+      <NavLink to={`/post/${postData.id}`}><img src={`http://localhost:8000/media/${postData.thumbnail}`} alt="" className='post-thumbnail'/></NavLink>
       <div className="post-details">
         {!viewedByOwner? <img src={`http://localhost:8000/media/${postData.owner.avatar}`} alt="" className="creator-avatar"/>: ''}
         <div className="post-info">

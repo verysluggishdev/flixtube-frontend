@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
     loggedIn: localStorage.getItem('token') ? true : false,
+    posts: []
 };
 
 const appSlice = createSlice({
@@ -12,10 +13,13 @@ const appSlice = createSlice({
       
       state.loggedIn = action.payload;
     },
+    setPosts: (state, action) => {
+      state.posts = action.payload;
+    },
 
   },
 });
 
-export const { setLoggedIn } = appSlice.actions;
+export const { setLoggedIn, setPosts } = appSlice.actions;
 
 export default appSlice.reducer;
