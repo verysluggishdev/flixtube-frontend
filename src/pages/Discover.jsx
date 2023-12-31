@@ -9,14 +9,14 @@ import { setPosts } from "../redux/features/appSlice"
 
 
 const Discover = () => {
-  const dispatch = useDispatch()
-  const posts = useSelector((state)=>state.app.posts)
-  const {data, isFetching, error} = useGetPostsQuery()
-  useEffect(() => {
-    !isFetching && !error? dispatch(setPosts(data)):''
-  }, [data, isFetching])
 
-  return  isFetching ? <Loader/> : (
+  const posts = useSelector((state)=>state.app.posts)
+
+  useEffect(()=>{
+
+  }, [posts])
+  
+  return  false ? <Loader/> : (
     <div className='content content-listing'>
       {posts?.map((post, i)=>{
         return <Post key={i} postData={post}/>
