@@ -5,55 +5,39 @@ import React, { useState} from 'react';
 
 const CategoryNav = ({categories}) => {
 
-  const [tabIndex, setTabIndex] = useState(0);
+  const [activeNavIndex, setActiveNavIndex] = useState(0);
+
+  const activeNavItem = document.getElementById(activeNavIndex.toString())
+
+  const handleNavBtnClick = ((action)=>{
+    console.log(activeNavIndex)
+    if (action === 'next'){
+      
+      if (activeNavIndex === categories.length-1){
+        setActiveNavIndex(0)
+      } else {
+        setActiveNavIndex(activeNavIndex + 1)
+      }  
+    
+    } else if (action === 'previous'){
+      if (activeNavIndex === 0) {
+        setActiveNavIndex(categories.length - 1)
+      } else {
+        setActiveNavIndex(activeNavIndex - 1)
+      }
+    }
+  })
   
   return (
-    <div className="category-nav">
-      
-      
-      <div className="bg-wrapper" onClick={() => {
-
-        if (tabIndex <= 0) {
-          setTabIndex(categories.length - 1);
-          return;
-        }
-
-        setTabIndex(tabIndex - 1);
-
-        }}>
-
-        <IoIosArrowBack  className='next-category-btn'/>
-        </div>
-
-        <Tabs size='sm' position="relative" variant="soft-rounded" index={tabIndex} colorScheme='blue' isFitted className='tabs'>
-
-        <TabList>
-          {categories.map((category, i)=>{
-            if (i > categories.length - 1) return <></>
-            return <Tab className='tab' onClick={()=>setTabIndex(i)} key={i}>{category}</Tab>
-          })}
-        </TabList>
-
-        </Tabs>
-
-        <div className="bg-wrapper" onClick={() => {
-
-        if (tabIndex >= categories.length - 1) {
-          setTabIndex(0);
-          return;
-        }
-
-        setTabIndex(tabIndex + 1);
-
-        }}>
-
-        <IoIosArrowForward  className='next-category-btn' />
-
-        </div>
-
-      
-
-    </div>
+    <nav className="category-nav">
+      <IoIosArrowBack className='nav-icon' onClick={()=>handleNavBtnClick('previous')}/>
+      <ul>
+        {categories?.map((category, i)=>{
+          return <li className={`category ${i == activeNavIndex ? 'active':''}`} id={i} key={i} onClick={()=>setActiveNavIndex(i)}>{category}</li>
+        })}
+      </ul>
+      <IoIosArrowForward className='nav-icon' onClick={()=>handleNavBtnClick('next')}/>
+    </nav>
   )
 }
 
