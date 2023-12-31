@@ -2,7 +2,8 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
     loggedIn: localStorage.getItem('token') ? true : false,
-    posts: []
+    posts: [],
+    isLoadingPosts: false
 };
 
 const appSlice = createSlice({
@@ -16,10 +17,13 @@ const appSlice = createSlice({
     setPosts: (state, action) => {
       state.posts = action.payload;
     },
+    setIsLoadingPosts: (state, action) => {
+      state.isLoadingPosts = action.payload;
+    },
 
   },
 });
 
-export const { setLoggedIn, setPosts } = appSlice.actions;
+export const { setLoggedIn, setPosts, setIsLoadingPosts } = appSlice.actions;
 
 export default appSlice.reducer;

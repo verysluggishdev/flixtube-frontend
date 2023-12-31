@@ -4,7 +4,7 @@ import './categoryNav.css'
 import React, { useEffect, useState} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useGetPostsQuery } from '../../redux/services/flixtubeCore';
-import { setPosts } from '../../redux/features/appSlice';
+import { setPosts, setIsLoadingPosts } from '../../redux/features/appSlice';
 
 const CategoryNav = ({categories}) => {
 
@@ -16,7 +16,8 @@ const CategoryNav = ({categories}) => {
 
   useEffect(()=>{
     if (!isFetching && !error) dispatch(setPosts(data));
-  }, [activeNavIndex, data])
+    dispatch(setIsLoadingPosts(isFetching))
+  }, [activeNavIndex, data, isFetching])
 
   const handleNavBtnClick = ((action)=>{
     console.log(activeNavIndex)
