@@ -1,11 +1,8 @@
 import Post from "../components/Post/Post"
-import './discover.css'
 import Loader from "../components/Loader/Loader"
-import { useState, useEffect } from "react"
-import { useGetPostsQuery } from "../redux/services/flixtubeCore"
-import { NavLink } from "react-router-dom"
-import { useSelector, useDispatch } from 'react-redux';
-
+import { useEffect } from "react"
+import { useSelector} from 'react-redux';
+import './discover.css'
 
 const Discover = () => {
 

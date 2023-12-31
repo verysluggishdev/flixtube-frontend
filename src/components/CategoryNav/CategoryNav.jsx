@@ -1,10 +1,9 @@
-import { Tabs, TabList, Tab } from '@chakra-ui/react'
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
-import './categoryNav.css'
 import React, { useEffect, useState} from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useGetPostsQuery } from '../../redux/services/flixtubeCore';
 import { setPosts, setIsLoadingPosts } from '../../redux/features/appSlice';
+import './categoryNav.css'
 
 const CategoryNav = ({categories}) => {
 

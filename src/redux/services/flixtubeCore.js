@@ -11,10 +11,36 @@ export const flixtubeCoreApi = createApi({
     },
   }),
   endpoints: (builder) => ({
-    getPosts: builder.query({ query: (urlParams) => 
-      `/posts?${urlParams?.category?`category=${urlParams.category}`:''}`}),
+    getPosts: builder.query({
+      query: (urlParams) => {
+        const {
+          category,
+          limit,
+          skip,
+          search,
+          owner_id,
+          sort_by_date
+        } = urlParams;
+    
+        const queryParams = [
+          category ? `category=${category}` : '',
+          limit ? `limit=${limit}` : '',
+          skip ? `skip=${skip}` : '',
+          search ? `search=${search}` : '',
+          owner_id ? `owner_id=${owner_id}` : '',
+          sort_by_date ? `sort_by_date=${sort_by_date}` : ''
+        ];
+    
+        const queryString = queryParams.filter(param => param !== '').join('&');
+    
+        return `/posts?${queryString}`;
+      }
+    }),
+
     getPost: builder.query({ query: (urlParams) => `/posts/${urlParams.postID}`}),
+    
     getUser: builder.query({ query: (urlParams) => `/users/${urlParams.userID}`}),
+    
     getUserPosts: builder.query({ query: (urlParams) => `/posts?owner_id=${urlParams.userID}`})
   }),
 });
