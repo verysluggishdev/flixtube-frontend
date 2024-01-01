@@ -47,6 +47,7 @@ export const flixtubeCoreApi = createApi({
 
 export const {
   useGetPostsQuery,
+  useLazyGetPostsQuery,
   useGetPostQuery,
   useGetUserQuery,
   useGetUserPostsQuery

@@ -16,6 +16,7 @@ import { useState, useEffect } from 'react';
 import { submitForm } from '../AccountMenu/AccountMenu';
 import { useDispatch } from 'react-redux';
 import { setPosts, setIsLoadingPosts } from '../../redux/features/appSlice';
+import { useLazyGetPostsQuery } from '../../redux/services/flixtubeCore';
 
 async function fetchPosts(url, token) {
   try {
@@ -50,20 +51,23 @@ const SideBar = () => {
   const loggedIn = useSelector((state)=>state.app.loggedIn)
   const [sortByDate, setSortByDate] = useState(0)
   const dispatch = useDispatch()
+  const [getPosts, { data, isLoading, error }] = useLazyGetPostsQuery()
   const getPostsByDate = () => {
-    setSortByDate(sortByDate==0 ? 1 : 0);
-    dispatch(setIsLoadingPosts(true))
-    const url = `http://localhost:8000/posts?sort_by_date=${sortByDate}`;
-    const token = localStorage.getItem('token')
-
-    fetchPosts(url, token)
-        .then(postsData => {
-            dispatch(setIsLoadingPosts(false))
-            if (postsData) {
-                dispatch(setPosts(postsData))
-            }
-    });
+    setSortByDate(sortByDate ? 0 : 1)
+    getPosts({sort_by_date: sortByDate})
   }
+
+  useEffect(()=>{
+    if (isLoading) {
+      dispatch(setIsLoadingPosts(true))
+    } else  {
+      dispatch(setIsLoadingPosts(false))
+      if (!error){
+        dispatch(setPosts(data))
+      }
+    }
+
+  }, [isLoading, data])
 
 
   return (
