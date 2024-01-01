@@ -1,16 +1,24 @@
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import React, { useEffect, useState} from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useGetPostsQuery } from '../../redux/services/flixtubeCore';
-import { setPosts, setIsLoadingPosts } from '../../redux/features/appSlice';
+import { setPosts, setIsLoadingPosts, setActiveQueryFilters } from '../../redux/features/appSlice';
 import './categoryNav.css'
 
 const CategoryNav = ({categories}) => {
-
+  const queryFilters = useSelector((state)=>state.app.activeQueryFilters)
+  console.log(queryFilters.category)
   const [activeNavIndex, setActiveNavIndex] = useState(0);
   const category = document.getElementById(activeNavIndex.toString())?.textContent
   const dispatch = useDispatch()
   const {data, isFetching, error} = useGetPostsQuery({category})
+  
+  useEffect(()=>{
+    if (category && !queryFilters.category !== category) {
+      dispatch(setActiveQueryFilters({...queryFilters, category: category}))
+    } 
+  }, [category])
+
 
 
   useEffect(()=>{

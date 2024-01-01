@@ -9,34 +9,14 @@ import { NavLink } from 'react-router-dom';
 import { HiOutlineLogout } from "react-icons/hi";
 import {store} from '../../redux/store'
 import { setLoggedIn } from '../../redux/features/appSlice';
-import { useSelector } from 'react-redux';
 import { IoIosLogIn } from "react-icons/io";
 import LoginUserForm from '../forms/LoginUserForm';
 import { useState, useEffect } from 'react';
 import { submitForm } from '../AccountMenu/AccountMenu';
-import { useDispatch } from 'react-redux';
-import { setPosts, setIsLoadingPosts } from '../../redux/features/appSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { setPosts, setIsLoadingPosts, setActiveQueryFilters } from '../../redux/features/appSlice';
 import { useLazyGetPostsQuery } from '../../redux/services/flixtubeCore';
 
-async function fetchPosts(url, token) {
-  try {
-      const response = await fetch(url, 
-        {headers: {
-          'Authorization': `Bearer ${token}`,
-          'Content-Type': 'application/json', // Adjust the content type based on your API requirements
-      }});
-
-      if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
-      }
-
-      const posts = await response.json();
-      return posts;
-  } catch (error) {
-      console.error(`Error fetching posts: ${error.message}`);
-      return null;
-  }
-}
 
 function logOutUser(){
   localStorage.removeItem("token")
@@ -47,14 +27,15 @@ function logOutUser(){
 }
 
 const SideBar = () => {
+  const queryFilters = useSelector((state)=>state.app.activeQueryFilters)
   const [loginUserFormIsOpen, setLoginUserFormIsOpen] = useState(false)
   const loggedIn = useSelector((state)=>state.app.loggedIn)
-  const [sortByDate, setSortByDate] = useState(0)
+  const [sortByDate, setSortByDate] = useState(1)
   const dispatch = useDispatch()
   const [getPosts, { data, isLoading, error }] = useLazyGetPostsQuery()
   const getPostsByDate = () => {
     setSortByDate(sortByDate ? 0 : 1)
-    getPosts({sort_by_date: sortByDate})
+    getPosts({...queryFilters, sort_by_date: sortByDate})
   }
 
   useEffect(()=>{

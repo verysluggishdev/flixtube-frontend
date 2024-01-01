@@ -3,7 +3,8 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
     loggedIn: localStorage.getItem('token') ? true : false,
     posts: [],
-    isLoadingPosts: false
+    isLoadingPosts: false,
+    activeQueryFilters:{}
 };
 
 const appSlice = createSlice({
@@ -20,10 +21,13 @@ const appSlice = createSlice({
     setIsLoadingPosts: (state, action) => {
       state.isLoadingPosts = action.payload;
     },
+    setActiveQueryFilters: (state, action) => {
+      state.activeQueryFilters = action.payload;
+    },
 
   },
 });
 
-export const { setLoggedIn, setPosts, setIsLoadingPosts } = appSlice.actions;
+export const { setLoggedIn, setPosts, setIsLoadingPosts, setActiveQueryFilters } = appSlice.actions;
 
 export default appSlice.reducer;
