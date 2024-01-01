@@ -12,8 +12,30 @@ import { setLoggedIn } from '../../redux/features/appSlice';
 import { useSelector } from 'react-redux';
 import { IoIosLogIn } from "react-icons/io";
 import LoginUserForm from '../forms/LoginUserForm';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { submitForm } from '../AccountMenu/AccountMenu';
+import { useDispatch } from 'react-redux';
+import { setPosts, setIsLoadingPosts } from '../../redux/features/appSlice';
+
+async function fetchPosts(url, token) {
+  try {
+      const response = await fetch(url, 
+        {headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json', // Adjust the content type based on your API requirements
+      }});
+
+      if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+
+      const posts = await response.json();
+      return posts;
+  } catch (error) {
+      console.error(`Error fetching posts: ${error.message}`);
+      return null;
+  }
+}
 
 function logOutUser(){
   localStorage.removeItem("token")
@@ -26,11 +48,29 @@ function logOutUser(){
 const SideBar = () => {
   const [loginUserFormIsOpen, setLoginUserFormIsOpen] = useState(false)
   const loggedIn = useSelector((state)=>state.app.loggedIn)
+  const [sortByDate, setSortByDate] = useState(0)
+  const dispatch = useDispatch()
+  const getPostsByDate = () => {
+    setSortByDate(sortByDate==0 ? 1 : 0);
+    dispatch(setIsLoadingPosts(true))
+    const url = `http://localhost:8000/posts?sort_by_date=${sortByDate}`;
+    const token = localStorage.getItem('token')
+
+    fetchPosts(url, token)
+        .then(postsData => {
+            dispatch(setIsLoadingPosts(false))
+            if (postsData) {
+                dispatch(setPosts(postsData))
+            }
+    });
+  }
+
+
   return (
     <div className='sidebar'>
       <section>
         <NavLink to={'/'} className='nav-link' tabIndex={1}><MdHome className='sidebar-icon'/> Home</NavLink>
-        <NavLink tabIndex={2} className='nav-link'><MdAutorenew className='sidebar-icon'/> New</NavLink>
+        <NavLink tabIndex={2} className='nav-link' onClick={getPostsByDate}><MdAutorenew className='sidebar-icon'/> {sortByDate ? 'New':'Old'}</NavLink>
         <NavLink tabIndex={3} className='nav-link'><BiSolidMoviePlay className='sidebar-icon'/> Subscriptions</NavLink>
         <hr />
       </section>
