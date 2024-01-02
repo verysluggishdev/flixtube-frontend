@@ -41,7 +41,6 @@ export const flixtubeCoreApi = createApi({
     
     getUser: builder.query({ query: (urlParams) => `/users/${urlParams.userID}`}),
     
-    getUserPosts: builder.query({ query: (urlParams) => `/posts?owner_id=${urlParams.userID}`})
   }),
 });
 
@@ -50,5 +49,4 @@ export const {
   useLazyGetPostsQuery,
   useGetPostQuery,
   useGetUserQuery,
-  useGetUserPostsQuery
 } = flixtubeCoreApi;

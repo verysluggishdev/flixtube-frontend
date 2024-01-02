@@ -1,38 +1,53 @@
 import { Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react'
 import './account.css'
-import CategoryNav from '../components/CategoryNav/CategoryNav'
 import { useState, useEffect } from 'react'
 import Loader from '../components/Loader/Loader'
-import { useGetUserQuery, useGetUserPostsQuery } from '../redux/services/flixtubeCore'
+import { useGetUserQuery, useLazyGetPostsQuery } from '../redux/services/flixtubeCore'
 import Post from '../components/Post/Post'
 import { IoAddCircle } from 'react-icons/io5'
 import CreatePostForm from '../components/forms/CreatePostForm'
 import { submitForm } from '../components/AccountMenu/AccountMenu'
-
+import { useDispatch, useSelector } from 'react-redux'
+import { setPosts, setActiveQueryFilters } from '../redux/features/appSlice'
 
 
 
 const Account = () => {
+  const dispatch = useDispatch()
   const [user, setUser] = useState(null)
   const [ready, setReady] = useState(false)
-  const [userPosts, setUserPosts] = useState(null)
+  const posts = useSelector((state)=>state.app.posts)
   const [createPostFormIsOpen, setCreatePostFormIsOpen] = useState(false)
+  const queryFilters = useSelector((state)=>state.app.activeQueryFilters)
+  const [getPosts, { data, isLoading, error }] = useLazyGetPostsQuery()
 
   const userID = localStorage.getItem('userID')
   if (!userID){
     window.location.href = '/'
   }
   const getUserQuery = useGetUserQuery({userID: userID})
-  const getUserPostsQuery = useGetUserPostsQuery({userID: userID})
+  
+  console.log(queryFilters)
 
   useEffect(()=>{
-    if (!getUserPostsQuery.isFetching && !getUserQuery.isFetching){
+    dispatch(setActiveQueryFilters({...queryFilters, owner_id: userID}))
+    return ()=>{
+      dispatch(setActiveQueryFilters({...queryFilters, owner_id: null}))
+    }
+  }, [])
+
+  useEffect(()=>{
+    if (queryFilters)getPosts(queryFilters)
+  }, [queryFilters])
+
+  useEffect(()=>{
+    if (!isLoading && !getUserQuery.isFetching){
       setUser(getUserQuery.data)
-      setUserPosts(getUserPostsQuery.data)
+      dispatch(setPosts(data))
       setReady(true)
     }
 
-  }, [getUserPostsQuery.data, getUserQuery.data])
+  }, [data, getUserQuery.data])
   
   return  !ready ? <Loader/> : (
     <div className="content account-main">
@@ -64,7 +79,7 @@ const Account = () => {
         <TabPanels>
           <TabPanel className='panel'>  
               <div className='content-listing'>
-                {userPosts.map((post, i)=>{
+                {posts?.map((post, i)=>{
                   return  <Post postData={post} key={i} viewedByOwner={true}/>
                 })}
               </div>
