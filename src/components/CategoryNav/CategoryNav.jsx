@@ -7,19 +7,16 @@ import './categoryNav.css'
 
 const CategoryNav = ({categories}) => {
   const queryFilters = useSelector((state)=>state.app.activeQueryFilters)
-  console.log(queryFilters.category)
   const [activeNavIndex, setActiveNavIndex] = useState(0);
   const category = document.getElementById(activeNavIndex.toString())?.textContent
   const dispatch = useDispatch()
-  const {data, isFetching, error} = useGetPostsQuery({category})
-  
+  const {data, isFetching, error} = useGetPostsQuery({...queryFilters, category: category})
+
   useEffect(()=>{
     if (category && !queryFilters.category !== category) {
       dispatch(setActiveQueryFilters({...queryFilters, category: category}))
     } 
   }, [category])
-
-
 
   useEffect(()=>{
     if (!isFetching && !error) dispatch(setPosts(data));
@@ -27,7 +24,6 @@ const CategoryNav = ({categories}) => {
   }, [activeNavIndex, data, isFetching])
 
   const handleNavBtnClick = ((action)=>{
-    console.log(activeNavIndex)
     if (action === 'next'){
       
       if (activeNavIndex === categories.length-1){

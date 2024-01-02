@@ -33,10 +33,15 @@ const SideBar = () => {
   const [sortByDate, setSortByDate] = useState(1)
   const dispatch = useDispatch()
   const [getPosts, { data, isLoading, error }] = useLazyGetPostsQuery()
+
   const getPostsByDate = () => {
     setSortByDate(sortByDate ? 0 : 1)
-    getPosts({...queryFilters, sort_by_date: sortByDate})
+    dispatch(setActiveQueryFilters({...queryFilters, sort_by_date: sortByDate}))
   }
+
+  useEffect(()=>{
+    getPosts(queryFilters)
+  }, [sortByDate])
 
   useEffect(()=>{
     if (isLoading) {
