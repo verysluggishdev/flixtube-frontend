@@ -62,15 +62,12 @@ const Account = () => {
           <Tab>About</Tab>
         </TabList>
         <TabPanels>
-          <TabPanel className='panel'>
-            <div className="flex-col">
-              <CategoryNav categories={['Latest', 'Popular', 'Oldest']}/>
+          <TabPanel className='panel'>  
               <div className='content-listing'>
                 {userPosts.map((post, i)=>{
                   return  <Post postData={post} key={i} viewedByOwner={true}/>
                 })}
               </div>
-            </div>
           </TabPanel>
           <TabPanel>
             <p className="about">Welcome to BruhMan, the ultimate meme destination where laughter knows no bounds! 🤣 Brace yourself for a rollercoaster of hilarity as we curate the dankest and most relatable memes that'll have you saying 'bruh' in every language. From side-splitting humor to mind-bending absurdity, BruhMan is your go-to spot for daily doses of laughter and a guaranteed escape from the ordinary. Get ready to embark on a meme-filled journey where every post is a bruh moment waiting to happen! 😂 </p>

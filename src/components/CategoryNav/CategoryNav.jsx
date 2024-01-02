@@ -23,6 +23,7 @@ const CategoryNav = ({categories}) => {
     dispatch(setIsLoadingPosts(isFetching))
   }, [activeNavIndex, data, isFetching])
 
+
   const handleNavBtnClick = ((action)=>{
     if (action === 'next'){
       
