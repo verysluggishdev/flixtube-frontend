@@ -9,7 +9,7 @@ import CreatePostForm from '../components/forms/CreatePostForm'
 import { submitForm } from '../components/AccountMenu/AccountMenu'
 import { useDispatch, useSelector } from 'react-redux'
 import { setPosts, setActiveQueryFilters } from '../redux/features/appSlice'
-
+import { Tooltip } from '@chakra-ui/react'
 
 
 const Account = () => {
@@ -65,7 +65,9 @@ const Account = () => {
             <p className="channel-headline">You Laugh You Lose</p>
             <div className="flex-row">
               <button className="subscribe-btn">Subscribe</button>
-              <IoAddCircle className='add-post-btn' onClick={() => setCreatePostFormIsOpen(true)}/>
+              <Tooltip label='New Post' fontSize='md'>
+                <span><IoAddCircle className='add-post-btn' onClick={() => setCreatePostFormIsOpen(true)}/></span>
+              </Tooltip>
             </div>
           </div>
         </div>

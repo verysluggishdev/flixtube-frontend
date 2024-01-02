@@ -6,6 +6,7 @@ import { submitForm } from '../AccountMenu/AccountMenu';
 import { FaPenToSquare } from "react-icons/fa6";
 import UpdatePostForm from '../forms/UpdatePostForm';
 import { NavLink } from 'react-router-dom';
+import { Tooltip } from '@chakra-ui/react';
 
 function determinePeriod(date) {
   const givenDate = new Date(date);
@@ -59,8 +60,9 @@ const Post = ({postData, viewedByOwner}) => {
           <div className="flex-container">
             <p className="view-count">100k Views</p>
             <p className="upload-date">Uploaded {uploadDate}</p>
-            {viewedByOwner? <FaTrash className='delete-post-btn' onClick={() => setDeletePostFormIsOpen(true)}/>: ''}
-            {viewedByOwner? <FaPenToSquare className='update-post-btn' onClick={() => setUpdatePostFormIsOpen(true)}/>: ''}
+            {viewedByOwner? <Tooltip label='Delete Post' fontSize='md'><span><FaTrash className='delete-post-btn' onClick={() => setDeletePostFormIsOpen(true)}/></span></Tooltip>: ''}
+            {viewedByOwner? <Tooltip label='Edit Post' fontSize='md'><span><FaPenToSquare className='update-post-btn' onClick={() => setUpdatePostFormIsOpen(true)}/></span></Tooltip>: ''}
+            
           </div>
         </div>
 
