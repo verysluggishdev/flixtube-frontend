@@ -26,8 +26,6 @@ const Account = () => {
     window.location.href = '/'
   }
   const getUserQuery = useGetUserQuery({userID: userID})
-  
-  console.log(queryFilters)
 
   useEffect(()=>{
     dispatch(setActiveQueryFilters({...queryFilters, owner_id: userID}))
@@ -44,6 +42,7 @@ const Account = () => {
     if (!isLoading && !getUserQuery.isFetching){
       setUser(getUserQuery.data)
       dispatch(setPosts(data))
+      console.log(data)
       setReady(true)
     }
 
