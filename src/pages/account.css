@@ -2,6 +2,7 @@
     width: 10rem;
     border-radius: 50%;
     height: 10rem;
+    object-fit: cover;
 }
 
 .channel-name{
@@ -46,10 +47,6 @@
     font-style: italic;
 }
 
-.subscribe-btn:hover{
-    background-color: gray;
-    color: white;
-}
 
 .account-main{
     display: flex;

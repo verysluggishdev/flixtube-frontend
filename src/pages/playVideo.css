@@ -14,7 +14,6 @@
 .play-video-page .container{
     display: flex;
     gap: 2rem;
-    /* border: 1px solid red; */
     width: 60%;
     justify-content: space-between;
 }
@@ -26,6 +25,8 @@
 .play-video-page .avatar{
     width: 3.5rem;
     border-radius: 50%;
+    height: 3.5rem;
+    object-fit: cover;
 }
 
 
@@ -80,4 +81,9 @@
 
 .metric-count{
     font-weight: 800;
+}
+
+.unsubscribed{
+    background-color: gray !important;
+    color: white !important;    
 }

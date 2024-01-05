@@ -38,7 +38,6 @@ const Post = ({postData, viewedByOwner}) => {
   const [deletePostFormIsOpen, setDeletePostFormIsOpen] = useState(false)
   const [updatePostFormIsOpen, setUpdatePostFormIsOpen] = useState(false)
 
-
   useEffect(() => {
     const intervalId = setInterval(() => {
       // Update the upload date every minute

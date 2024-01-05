@@ -1,4 +1,19 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { createAsyncThunk } from '@reduxjs/toolkit';
+
+export const subscribe = createAsyncThunk('users/subscribe', async (userId) => {
+  const response = await fetch(`http://localhost:8000/users/${userId}`, {
+    method: 'POST',
+    headers: {
+      'Authorization': `Bearer ${localStorage.getItem('token')}`
+    }
+  });
+
+  if (!response.ok) {
+    throw new Error('Failed to subscribe');
+  }
+  return null;
+});
 
 export const flixtubeCoreApi = createApi({
   reducerPath: 'flixtubeCoreApi',
@@ -42,6 +57,14 @@ export const flixtubeCoreApi = createApi({
     getUser: builder.query({ query: (urlParams) => `/users/${urlParams.userID}`}),
     
   }),
+  extraReducers: (builder) => {
+    builder.addCase(subscribe.fulfilled, (state, action) => {
+      // Handle successful POST response if needed
+    });
+    builder.addCase(subscribe.rejected, (state, action) => {
+      // Handle rejected POST request if needed
+    });
+  },
 });
 
 export const {

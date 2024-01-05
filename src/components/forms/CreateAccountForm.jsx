@@ -53,6 +53,8 @@ const CreateAccountForm = ({isOpen, onClose, onSubmit}) => {
                 <input type="text" name="channelName"/>
                 <label htmlFor="channelID">Channel ID</label>
                 <input type="text" name="channelID"/>
+                <label htmlFor="channelDescription">Channel Description</label>
+                <textarea name="channelDescription" id="" cols="30" rows="3"></textarea>
                 <label htmlFor="avatar">Avatar</label>
                 <input type="file" name="avatar" className='avatar-form-input'/>
             </form>

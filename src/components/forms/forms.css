@@ -14,14 +14,14 @@
     margin: .25rem 0;
 }
 
-.data-form input{
+.data-form input, textarea{
     background-color: transparent;
     border: 1px solid gray;
     width: 100%;
     border-radius: 5px;
 }
 
-.data-form input:focus{
+.data-form input:focus, textarea:focus{
     outline: none;
 }
 

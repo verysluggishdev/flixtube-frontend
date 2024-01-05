@@ -6,6 +6,8 @@ import Loader from '../components/Loader/Loader'
 import { IoMdThumbsUp, IoMdThumbsDown, IoMdShareAlt } from "react-icons/io";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import React, { useState, useEffect } from 'react';
+import { subscribe } from '../redux/services/flixtubeCore'
+import { useDispatch } from 'react-redux';
 
 
 const PlayVideo = () => {
@@ -18,6 +20,12 @@ const PlayVideo = () => {
   const [likeCount, setLikedCount] = useState(0)
   const [dislikeCount, setDisLikeCount] = useState(0)
   const [shareCount, setShareCount] = useState(0)
+  const [subscribed, setSubscribed] = useState(false)
+  const dispatch = useDispatch()
+
+  function handleSubscribe(id){
+    dispatch(subscribe(id))
+  }
 
   useEffect(() => {
     // Update state based on the fetched data when it's available
@@ -28,6 +36,7 @@ const PlayVideo = () => {
       setLiked(data.liked);
       setDisLiked(data.disliked);
       setShared(data.shared);
+      setSubscribed(data.subscribed)
     }
   }, [data, isFetching])
   
@@ -103,12 +112,6 @@ const PlayVideo = () => {
       console.error('Error:', error);
     });
   }
-
-  
-    
-    
-
-  
   
   return isFetching  ? <Loader/> :(
     <div className="play-video-page content">
@@ -127,7 +130,7 @@ const PlayVideo = () => {
           <img src={`http://localhost:8000/media/${data?.owner.avatar}`} alt="" className="avatar" />
           <div className="flex-col">
             <p className="channelID">@{data?.owner.channelID}</p>
-            <button className="subscribe-btn">Subscribe</button>
+            <button className={`subscribe-btn ${subscribed?'unsubscribed':''}`} onClick={()=>{handleSubscribe(data.owner.id); setSubscribed(!subscribed) }}>{subscribed ? 'Unsubscribe' : 'subscribe'}</button>
           </div>
         </div>
         <div className="metric-buttons flex-row">

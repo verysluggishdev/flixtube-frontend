@@ -10,6 +10,7 @@ import { submitForm } from '../components/AccountMenu/AccountMenu'
 import { useDispatch, useSelector } from 'react-redux'
 import { setPosts, setActiveQueryFilters } from '../redux/features/appSlice'
 import { Tooltip } from '@chakra-ui/react'
+import { subscribe } from '../redux/services/flixtubeCore'
 
 
 const Account = () => {
@@ -19,7 +20,12 @@ const Account = () => {
   const posts = useSelector((state)=>state.app.posts)
   const [createPostFormIsOpen, setCreatePostFormIsOpen] = useState(false)
   const queryFilters = useSelector((state)=>state.app.activeQueryFilters)
+  const [subscribed, setSubscribed] = useState(false)
   const [getPosts, { data, isLoading, error }] = useLazyGetPostsQuery()
+  
+  function handleSubscribe(id){
+    if (id) dispatch(subscribe(id))
+  }
 
   const userID = localStorage.getItem('userID')
   if (!userID){
@@ -41,12 +47,17 @@ const Account = () => {
   useEffect(()=>{
     if (!isLoading && !getUserQuery.isFetching){
       setUser(getUserQuery.data)
+      setSubscribed(data.subscribed)
       dispatch(setPosts(data))
-      console.log(data)
       setReady(true)
     }
 
   }, [data, getUserQuery.data])
+
+  useEffect(()=>{
+    console.log(user)
+    if (user) setSubscribed(user.subscribed);
+  }, [user])
   
   return  !ready ? <Loader/> : (
     <div className="content account-main">
@@ -57,13 +68,13 @@ const Account = () => {
             <h1 className="channel-name">{user?.channelName}</h1>
             <div className="flex-row">
             <p className="channel-id">@{user?.channelID}</p>
-            <p className="channel-subscriber-count">8.9M subscribers</p>
-            <p className="channel-video-upload-count">1.5k videos</p>
+            <p className="channel-subscriber-count">{user?.subscriber_count} subscribers</p>
+            <p className="channel-video-upload-count">{posts.length} posts</p>
             <p className="channel-view-count">100M views</p>
             </div>
             <p className="channel-headline">You Laugh You Lose</p>
             <div className="flex-row">
-              <button className="subscribe-btn">Subscribe</button>
+            <button className={`subscribe-btn ${subscribed?'unsubscribed':''}`} onClick={()=>{handleSubscribe(user?.id); setSubscribed(!subscribed) }}>{subscribed ? 'Unsubscribe' : 'Subscribe'}</button>
               <Tooltip label='New Post' fontSize='md'>
                 <span><IoAddCircle className='add-post-btn' onClick={() => setCreatePostFormIsOpen(true)}/></span>
               </Tooltip>
@@ -86,7 +97,7 @@ const Account = () => {
               </div>
           </TabPanel>
           <TabPanel>
-            <p className="about">Welcome to BruhMan, the ultimate meme destination where laughter knows no bounds! 🤣 Brace yourself for a rollercoaster of hilarity as we curate the dankest and most relatable memes that'll have you saying 'bruh' in every language. From side-splitting humor to mind-bending absurdity, BruhMan is your go-to spot for daily doses of laughter and a guaranteed escape from the ordinary. Get ready to embark on a meme-filled journey where every post is a bruh moment waiting to happen! 😂 </p>
+            <p className="about">{user?.channelDescription}</p>
           </TabPanel>
         </TabPanels>
       </Tabs>
