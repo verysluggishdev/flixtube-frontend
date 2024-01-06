@@ -34,7 +34,8 @@ export const flixtubeCoreApi = createApi({
           skip,
           search,
           owner_id,
-          sort_by_date
+          sort_by_date,
+          subscribed,
         } = urlParams;
     
         const queryParams = [
@@ -43,7 +44,8 @@ export const flixtubeCoreApi = createApi({
           skip ? `skip=${skip}` : '',
           search ? `search=${search}` : '',
           owner_id ? `owner_id=${owner_id}` : '',
-          sort_by_date ? `sort_by_date=${sort_by_date}` : ''
+          sort_by_date ? `sort_by_date=${sort_by_date}` : '',
+          subscribed ? `subscribed=${subscribed}` : '',
         ];
     
         const queryString = queryParams.filter(param => param !== '').join('&');

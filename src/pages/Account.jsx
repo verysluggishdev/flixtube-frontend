@@ -47,7 +47,7 @@ const Account = () => {
   useEffect(()=>{
     if (!isLoading && !getUserQuery.isFetching){
       setUser(getUserQuery.data)
-      setSubscribed(data.subscribed)
+      setSubscribed(getUserQuery.data.subscribed)
       dispatch(setPosts(data))
       setReady(true)
     }
@@ -55,7 +55,6 @@ const Account = () => {
   }, [data, getUserQuery.data])
 
   useEffect(()=>{
-    console.log(user)
     if (user) setSubscribed(user.subscribed);
   }, [user])
   

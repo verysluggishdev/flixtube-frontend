@@ -31,6 +31,7 @@ const SideBar = () => {
   const [loginUserFormIsOpen, setLoginUserFormIsOpen] = useState(false)
   const loggedIn = useSelector((state)=>state.app.loggedIn)
   const [sortByDate, setSortByDate] = useState(1)
+  const [sortBySubscribed, setSortBySubscribed] = useState(true)
   const dispatch = useDispatch()
   const [getPosts, { data, isLoading, error }] = useLazyGetPostsQuery()
 
@@ -39,9 +40,19 @@ const SideBar = () => {
     dispatch(setActiveQueryFilters({...queryFilters, sort_by_date: sortByDate}))
   }
 
+  const getPostsBySubscribed = () => {
+    setSortBySubscribed(sortBySubscribed ? false : true)
+    dispatch(setActiveQueryFilters({...queryFilters, subscribed: sortBySubscribed}))
+  }
+
   useEffect(()=>{
     getPosts(queryFilters)
   }, [sortByDate])
+
+  useEffect(()=>{
+    console.log(sortBySubscribed)
+    getPosts(queryFilters)
+  }, [sortBySubscribed])
 
   useEffect(()=>{
     if (isLoading) {
@@ -61,7 +72,7 @@ const SideBar = () => {
       <section>
         <NavLink to={'/'} className='nav-link' tabIndex={1}><MdHome className='sidebar-icon'/> Home</NavLink>
         <NavLink tabIndex={2} className='nav-link' onClick={getPostsByDate}><MdAutorenew className='sidebar-icon'/> {sortByDate ? 'New':'Old'}</NavLink>
-        <NavLink tabIndex={3} className='nav-link'><BiSolidMoviePlay className='sidebar-icon'/> Subscriptions</NavLink>
+        <NavLink tabIndex={3} className='nav-link' onClick={getPostsBySubscribed}><BiSolidMoviePlay className='sidebar-icon'/>Subscribed</NavLink>
         <hr />
       </section>
       <section>
