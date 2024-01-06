@@ -45,14 +45,19 @@ const Account = () => {
   }, [queryFilters])
 
   useEffect(()=>{
-    if (!isLoading && !getUserQuery.isFetching){
-      setUser(getUserQuery.data)
-      setSubscribed(getUserQuery.data.subscribed)
+    if (!isLoading){
       dispatch(setPosts(data))
       setReady(true)
     }
 
-  }, [data, getUserQuery.data])
+  }, [data])
+
+  useEffect(()=>{
+    if (!getUserQuery.isFetching){
+      setUser(getUserQuery.data)
+      setSubscribed(getUserQuery.data.subscribed)
+    }
+  }, [getUserQuery.data])
 
   useEffect(()=>{
     if (user) setSubscribed(user.subscribed);
@@ -68,7 +73,7 @@ const Account = () => {
             <div className="flex-row">
             <p className="channel-id">@{user?.channelID}</p>
             <p className="channel-subscriber-count">{user?.subscriber_count} subscribers</p>
-            <p className="channel-video-upload-count">{posts.length} posts</p>
+            <p className="channel-video-upload-count">{posts?.length} posts</p>
             <p className="channel-view-count">100M views</p>
             </div>
             <p className="channel-headline">You Laugh You Lose</p>

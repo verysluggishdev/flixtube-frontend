@@ -50,7 +50,6 @@ const SideBar = () => {
   }, [sortByDate])
 
   useEffect(()=>{
-    console.log(sortBySubscribed)
     getPosts(queryFilters)
   }, [sortBySubscribed])
 
